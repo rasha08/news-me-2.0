@@ -19,12 +19,15 @@
   },
   "homepage": "https://github.com/rasha08/news-me-2.0#readme",
   "dependencies": {
-    "axios": "^0.18.0",
     "inferno": "^5.0.5",
     "inferno-router": "^5.0.5",
     "inferno-server": "^5.0.5",
+    "lodash": "^4.17.10",
     "next": "^6.0.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0"
   }
 }

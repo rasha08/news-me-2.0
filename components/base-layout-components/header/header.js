@@ -1,8 +1,21 @@
-const Header = () => 
-  <header>
-    <h1 onClick={() => { alert('fuck') }}>Most important heading here</h1>
-    <h3>Less important heading here</h3>
-    <p>Some additional information here</p>
-  </header>
+import MenuButton from '../../helpers/header/menu-button/menu-button';
+import RightNavigation from '../../helpers/header/right-navigation/right-navigation';
+import MainNavigation from '../../helpers/header/main-navigation/main-navigation';
+
+const Header = (props) => {
+  const { navigation } = props;
+  return (
+    <header>
+      <div className="container">
+        <nav>
+          <MenuButton />
+          <a href="/" className="logo" id="logo"></a>
+          <MainNavigation navigation={navigation} />
+          <RightNavigation />      
+        </nav>
+      </div>
+    </header>
+  )
+}
 
 export default Header;

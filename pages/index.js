@@ -1,22 +1,18 @@
-import { createTextVNode, render, Component } from 'inferno';
-import { renderenderToString } from 'inferno-server';
+import { Component } from 'react';
 
-import CustomHead from '../components/base-layout-components/head/head'
-import Header from '../components/base-layout-components/header/header';
+// import BaseLayout from '../../components/base-layout-components/base-layout/base-layout';
 
 class MyComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0
-    };
+  constructor() {
+    super();
   }
+
   render() {
     return (
       <div>
-        <CustomHead title={' News Me Next JS app '} />
-        <Header /> 
-        
+        <div>
+          <h1>KOJI KURAC</h1>
+       </div>
       </div>
     );
   }

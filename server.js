@@ -1,26 +1,81 @@
-const express = require('express');
-const { parse } = require('url');
-const next = require('next');
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const express = require("express");
+const next = require("next");
+const axios = require("axios");
+const { get, map, filter, find, startCase, toUpper, uniqBy, kebabCase, reverse, remove } = require('lodash');
 
-app.prepare().then(() => {
-  const server = express();
-  // CUSTOM ROUTES GO HERE
-  server.get('/blog/:slug', (req, res) => {
-    const mergedQuery = Object.assign({}, req.query, req.params);
-    return app.render(req, res, '/blog', mergedQuery);
-  });
-  // THIS IS THE DEFAULT ROUTE, DON'T EDIT THIS 
-  server.get('*', (req, res) => {
-    return handle(req, res);
-  });
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== "production";
+const nextApp = next({ dev });
+const nextHandle = nextApp.getRequestHandler();
 
-  const port = process.env.PORT || 8000;
+let websiteConfiguration;
+let newsCategories;
+let navigation;
 
-  server.listen(port, err => {
-    if (err) throw err;
-    console.log(`> Ready on port ${port}...`);
+nextApp.prepare()
+    .then(() => {
+      fetchNewsAndConfiguration().then(() => {
+        scheduleNewsAndConfigurationRefresh()
+        const server = express();
+
+        server.get("/", (req, res) => {
+          console.log('Requesting Home page')
+          nextApp.render(req, res, "/home", prepareResponseForCategory());
+        });
+  
+        server.get("*", (req, res) => {
+          return nextHandle(req, res)
+        });
+  
+        server.listen(port, (err) => {
+          if (err) {
+            throw err;
+          }
+          console.log(`> Ready on http://localhost:${port}`)
+        });
+      });
   });
-});
+    
+
+let fetchNewsAndConfiguration = () => {
+  return new Promise((resolve, reject) => {
+    axios.get('http://api-news-me.ml/public/today-news').then(apiNewsAndConfiguration => {
+      websiteConfiguration = apiNewsAndConfiguration.data['clientConfiguration'];
+      newsCategories = apiNewsAndConfiguration.data['newsCategories'];
+      navigation = reverse(remove(map(newsCategories, formatNavigationItems), removeTopHeadlinesFromNavigation));
+      
+      console.log('**** news and configuration fetched and ready ***')
+      resolve(true);
+    })
+  }) 
+}
+
+
+let scheduleNewsAndConfigurationRefresh = () => setInterval(() => fetchNewsAndConfiguration(), 3600000);
+
+let removeTopHeadlinesFromNavigation = category => category.slug !== 'top-headlines';
+
+let formatNavigationItems = category => {
+  return {
+    slug: get(category, 'categoryName'),
+    name: toUpper(startCase(get(category, 'categoryName')))
+  }
+}
+
+let prepareNewsSource = singleNews => {
+  return {
+    title: get(singleNews, 'source'),
+    slug: kebabCase(get(singleNews, 'source'))
+  }
+}
+
+let prepareResponseForCategory = (categorySlug = 'top-headlines') => {
+  const newsCategory = find(newsCategories, category => get(category, 'categoryName') === categorySlug)
+  
+  return {
+    websiteConfiguration,
+    newsCategory,
+    navigation,
+    sources: uniqBy(map(get(newsCategory, 'news'), prepareNewsSource), 'slug')
+  }
+}
