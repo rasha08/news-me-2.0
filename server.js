@@ -20,7 +20,16 @@ nextApp.prepare()
 
         server.get("/", (req, res) => {
           console.log('Requesting Home page')
-          nextApp.render(req, res, "/home", prepareResponseForCategory());
+          nextApp.render(req, res, "/news-category", prepareResponseForCategory());
+        });
+        server.get("/today-news/news-category/:category", (req, res) => {
+          console.log(`Requesting ${req.params.category} category page`)
+          nextApp.render(req, res, "/news-category", prepareResponseForCategory(req.params.category));
+        });
+
+        server.get("/today-news/news-source/:source", (req, res) => {
+          console.log('Requesting Home page')
+          nextApp.render(req, res, "/news-category", prepareResponseForCategory());
         });
   
         server.get("*", (req, res) => {
@@ -70,7 +79,11 @@ let prepareNewsSource = singleNews => {
 }
 
 let prepareResponseForCategory = (categorySlug = 'top-headlines') => {
-  const newsCategory = find(newsCategories, category => get(category, 'categoryName') === categorySlug)
+  let newsCategory = find(newsCategories, category => get(category, 'categoryName') === categorySlug)
+  
+  if (!newsCategory) {
+    newsCategory = find(newsCategories, category => get(category, 'top-headlines') === categorySlug)
+  }
   
   return {
     websiteConfiguration,
