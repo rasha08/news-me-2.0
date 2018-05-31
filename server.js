@@ -20,22 +20,27 @@ nextApp.prepare()
 
         server.get("/", (req, res) => {
           console.log('Requesting Home page')
-          nextApp.render(req, res, "/news-category", prepareResponseForCategory());
+          nextApp.render(req, res, '/news-category', prepareResponseForCategory());
         });
-        server.get("/today-news/news-category/:category", (req, res) => {
+        server.get('/today-news/:category', (req, res) => {
           console.log(`Requesting ${req.params.category} category page`)
-          nextApp.render(req, res, "/news-category", prepareResponseForCategory(req.params.category));
+          nextApp.render(req, res, '/news-category', prepareResponseForCategory(req.params.category));
         });
 
-        server.get("/today-news/news-source/:source", (req, res) => {
-          console.log('Requesting Home page')
-          nextApp.render(req, res, "/news-category", prepareResponseForCategory());
+        server.get('/today-news/:category/:source', (req, res) => {
+          console.log(`Requesting ${req.params.source} source page`)
+          nextApp.render(req, res, '/news-category', prepareResponseForCategory());
         });
-  
+
+        server.get('/today-news/:category/:source/:newsSlug', (req, res) => {
+          console.log(`Requesting ${req.params.newsSlug} news page`)
+          nextApp.render(req, res, '/news-category', prepareResponseForCategory());
+        });
+
         server.get("*", (req, res) => {
           return nextHandle(req, res)
         });
-  
+
         server.listen(port, (err) => {
           if (err) {
             throw err;
@@ -44,7 +49,7 @@ nextApp.prepare()
         });
       });
   });
-    
+
 
 let fetchNewsAndConfiguration = () => {
   return new Promise((resolve, reject) => {
@@ -52,11 +57,11 @@ let fetchNewsAndConfiguration = () => {
       websiteConfiguration = apiNewsAndConfiguration.data['clientConfiguration'];
       newsCategories = apiNewsAndConfiguration.data['newsCategories'];
       navigation = reverse(remove(map(newsCategories, formatNavigationItems), removeTopHeadlinesFromNavigation));
-      
+
       console.log('**** news and configuration fetched and ready ***')
       resolve(true);
     })
-  }) 
+  })
 }
 
 
@@ -80,11 +85,11 @@ let prepareNewsSource = singleNews => {
 
 let prepareResponseForCategory = (categorySlug = 'top-headlines') => {
   let newsCategory = find(newsCategories, category => get(category, 'categoryName') === categorySlug)
-  
+
   if (!newsCategory) {
     newsCategory = find(newsCategories, category => get(category, 'top-headlines') === categorySlug)
   }
-  
+
   return {
     websiteConfiguration,
     newsCategory,
