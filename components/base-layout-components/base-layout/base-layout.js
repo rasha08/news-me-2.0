@@ -1,3 +1,5 @@
+
+import { get } from 'lodash';
 import CustomHead from '../head/head';
 import Header from '../header/header'
 import Head from '../head/head';
@@ -12,7 +14,7 @@ const BaseLayout = (props) => {
 
       <Header navigation={navigation} />
       
-      <Sidebar sources={sources} />
+      <Sidebar sources={sources} currentCategory={get(newsCategory,'categoryName')}/>
       
       <MainPresenter newsCategory={newsCategory} />
     </div>

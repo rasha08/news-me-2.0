@@ -1,8 +1,8 @@
-import { map } from 'lodash';
+import { map, get } from 'lodash';
 import NewsCard from '../../helpers/main-presenter/news-card/news-card';
 
 const MainPresenter = props => {
-  const { news } = props.newsCategory
+  const { news } = props.newsCategory || [];
   
   return(
    <section id="boxes" className="mobcards">

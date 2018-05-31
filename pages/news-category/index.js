@@ -30,7 +30,8 @@ export default class MyComponent extends Component {
               sources
             }}
           />
-       </div>
+        </div>
+       <script src="/static/js/custom.js"></script> 
       </div>
     );
   }

@@ -1,7 +1,7 @@
 const express = require("express");
 const next = require("next");
 const axios = require("axios");
-const { get, map, filter, find, startCase, toUpper, uniqBy, kebabCase, reverse, remove } = require('lodash');
+const { get, map, filter, find, startCase, toUpper, uniqBy, kebabCase, reverse, remove, cloneDeep } = require('lodash');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== "production";
@@ -29,7 +29,8 @@ nextApp.prepare()
 
         server.get('/today-news/:category/:source', (req, res) => {
           console.log(`Requesting ${req.params.source} source page`)
-          nextApp.render(req, res, '/news-category', prepareResponseForCategory());
+          const { category, source } = req.params;
+          nextApp.render(req, res, '/news-category', prepareResponseForSource(category, source));
         });
 
         server.get('/today-news/:category/:source/:newsSlug', (req, res) => {
@@ -84,16 +85,45 @@ let prepareNewsSource = singleNews => {
 }
 
 let prepareResponseForCategory = (categorySlug = 'top-headlines') => {
-  let newsCategory = find(newsCategories, category => get(category, 'categoryName') === categorySlug)
+  let newsCategory = findCategoryBySlug(categorySlug)
+  let sources = getUniqueSourcesForCategory(newsCategory)
+  
+  return formatResponseObject(websiteConfiguration, newsCategory, navigation, sources)
+}
 
-  if (!newsCategory) {
-    newsCategory = find(newsCategories, category => get(category, 'top-headlines') === categorySlug)
+let prepareResponseForSource = (categorySlug, source) => {
+  let newsCategory = findCategoryBySlug(categorySlug);
+  let sources = getUniqueSourcesForCategory(newsCategory)
+
+  if (newsCategory) {
+    newsCategory['news'] = filter(get(newsCategory, 'news'), singleNews => kebabCase(get(singleNews, 'source')) === source);
+  } else {
+    newsCategory = getCategoryDefaultObject();
   }
 
+  return formatResponseObject(websiteConfiguration, newsCategory, navigation, sources);
+}
+
+let findCategoryBySlug = (categorySlug) => {
+  return cloneDeep(find(newsCategories, category => get(category, 'categoryName') === categorySlug));
+}
+
+let getUniqueSourcesForCategory = (newsCategory) => {
+  return uniqBy(map(get(newsCategory, 'news'), prepareNewsSource), 'slug')
+}
+
+let formatResponseObject = (websiteConfiguration, newsCategory, navigation, sources) => {
   return {
     websiteConfiguration,
     newsCategory,
     navigation,
-    sources: uniqBy(map(get(newsCategory, 'news'), prepareNewsSource), 'slug')
+    sources
+  }
+}
+
+let getCategoryDefaultObject = () => {
+  return {
+    categoryName: '',
+    news: []
   }
 }
