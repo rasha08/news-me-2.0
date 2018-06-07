@@ -34,8 +34,10 @@ nextApp.prepare()
         });
 
         server.get('/today-news/:category/:source/:newsSlug', (req, res) => {
-          console.log(`Requesting ${req.params.newsSlug} news page`)
-          nextApp.render(req, res, '/news-category', prepareResponseForCategory());
+          const { category, source, newsSlug } = req.params;
+          console.log(`Requesting news page `,  category, source, newsSlug)
+          
+          nextApp.render(req, res, '/news-category', prepareSingleNewsResponse(category, newsSlug));
         });
 
         server.get("*", (req, res) => {
@@ -112,12 +114,13 @@ let getUniqueSourcesForCategory = (newsCategory) => {
   return uniqBy(map(get(newsCategory, 'news'), prepareNewsSource), 'slug')
 }
 
-let formatResponseObject = (websiteConfiguration, newsCategory, navigation, sources) => {
+let formatResponseObject = (websiteConfiguration, newsCategory, navigation, sources, currentNews = null) => {
   return {
     websiteConfiguration,
     newsCategory,
     navigation,
-    sources
+    sources,
+    currentNews
   }
 }
 
@@ -126,4 +129,16 @@ let getCategoryDefaultObject = () => {
     categoryName: '',
     news: []
   }
+}
+
+let prepareSingleNewsResponse = (categorySlug, newsSlug) => {
+  let newsCategory = findCategoryBySlug(categorySlug);
+  let sources = getUniqueSourcesForCategory(newsCategory);
+  let currentNews = findSingleNewsBySlug(newsCategory, newsSlug);
+ 
+  return formatResponseObject(websiteConfiguration, newsCategory, navigation, sources, currentNews);
+}
+
+let findSingleNewsBySlug = (newsCategory, newsSlug) => {
+  return find(get(newsCategory, 'news'), singleNews => get(singleNews, 'newsTitleSlug') === newsSlug)
 }

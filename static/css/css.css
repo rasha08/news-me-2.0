@@ -330,6 +330,11 @@ section .container-fluid#main{
   
 }
 
+#boxes.single-news {
+  margin-top: 100px;
+  left: 22%;
+}
+
 #boxes .container .box{ 
   min-width: 300px;
   margin-left: 0px !important;
@@ -399,6 +404,11 @@ section#boxes .btn{
   border: none;
   box-shadow: 1px 1px 2px 1px #000;
 }
+
+section#boxes .card-img-top {
+  max-height: 65vh !important;
+}
+
 
 
 
@@ -515,6 +525,10 @@ section#boxes .btn{
   .navigation-main li {
     border-right: 1px solid snow;
     padding-right: 1vw;
+  }
+
+  .navigation-main :last-child {
+    border-right: none;
   }
 }
 

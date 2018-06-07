@@ -5,11 +5,14 @@ import BaseLayout from '../../components/base-layout-components/base-layout/base
 
 export default class MyComponent extends Component {
   static getInitialProps(serverData) {
+    console.log(serverData.req)
     return {
       websiteConfiguration: serverData.query.websiteConfiguration,
       newsCategory: serverData.query.newsCategory,
       navigation: serverData.query.navigation,
-      sources: serverData.query.sources
+      sources: serverData.query.sources,
+      currentNews: serverData.query.currentNews,
+      originalUrl: serverData.req.originalUrl
     };
   }
 
@@ -18,7 +21,7 @@ export default class MyComponent extends Component {
   }
 
   render() {
-    const { websiteConfiguration, newsCategory, navigation, sources } = this.props;
+    const { websiteConfiguration, newsCategory, navigation, sources, currentNews, originalUrl } = this.props;
     return (
       <div>
         <div>
@@ -27,7 +30,9 @@ export default class MyComponent extends Component {
               websiteConfiguration,
               newsCategory,
               navigation,
-              sources
+              sources,
+              currentNews,
+              originalUrl
             }}
           />
         </div>

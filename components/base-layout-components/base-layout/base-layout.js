@@ -7,7 +7,7 @@ import Sidebar from '../sidebar/sidebar';
 import MainPresenter from '../main-presenter/main-presenter';
 
 const BaseLayout = (props) => {
-  const { navigation, sources, websiteConfiguration, newsCategory } = props.data;
+  const { navigation, sources, websiteConfiguration, newsCategory, currentNews, originalUrl } = props.data;
   return (
     <div>
       <CustomHead />
@@ -16,7 +16,12 @@ const BaseLayout = (props) => {
       
       <Sidebar sources={sources} currentCategory={get(newsCategory,'categoryName')}/>
       
-      <MainPresenter newsCategory={newsCategory} />
+      <MainPresenter
+        newsCategory={newsCategory}
+        currentNews={currentNews}
+        currentCategory={get(newsCategory, 'categoryName')}
+        originalUrl={originalUrl}
+      />
     </div>
   )  
 }
