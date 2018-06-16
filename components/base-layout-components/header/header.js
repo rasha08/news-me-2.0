@@ -3,15 +3,18 @@ import RightNavigation from '../../helpers/header/right-navigation/right-navigat
 import MainNavigation from '../../helpers/header/main-navigation/main-navigation';
 
 const Header = (props) => {
-  const { navigation } = props;
+  const { navigation, openModal, user, logout } = props;
   return (
     <header>
       <div className="container">
         <nav>
           <MenuButton />
+
           <a href="/" className="logo" id="logo"></a>
+
           <MainNavigation navigation={navigation} />
-          <RightNavigation />      
+
+          <RightNavigation openModal={openModal} logout={logout} user={user} />
         </nav>
       </div>
     </header>
