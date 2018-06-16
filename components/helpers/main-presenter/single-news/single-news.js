@@ -1,4 +1,5 @@
 import { get } from 'lodash';
+
 import SingleNewsImage from './single-news-image/single-news-image';
 import SingleNewsBody from './single-news-body/single-news-body'
 import SingleNewsActions from './single-news-actions/single-news-actions';

@@ -10,8 +10,11 @@ const MainPresenter = props => {
     <section id="boxes" className={currentNews ? 'single-news mobcards' : 'mobcards'}>
       {
         currentNews ?
-          <SingleNews currentNews={currentNews} originalUrl={originalUrl} /> :
-          <NewsCards news={news} currentCategory={currentCategory} /> 
+          <SingleNews
+            currentNews={currentNews}
+            originalUrl={originalUrl}
+          /> :
+          <NewsCards news={news} currentCategory={currentCategory} />
       }
     </section>
   );

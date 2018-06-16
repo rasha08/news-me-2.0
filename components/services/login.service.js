@@ -51,7 +51,7 @@ export const checkIfUserLoggedIn = () => {
   const userToken =getKey('NEWS_TOKEN')
 
   return userToken ?
-    submitDataToApi('loginWithToken', {userToken: userToken}) :
+    submitDataToApi('loginWithToken', {token: userToken}) :
     new Promise((resolve, reject) => {
       reject();
     })

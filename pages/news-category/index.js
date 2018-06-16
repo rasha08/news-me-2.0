@@ -3,6 +3,7 @@ import BaseLayout from '../../components/base-layout-components/base-layout/base
 import { get } from 'lodash';
 import { closeModal, submitModal } from '../../components/services/modal-helper.service';
 import { logout, checkIfUserLoggedIn } from '../../components/services/login.service';
+import { addNewsToVisited, removeVisitedNews } from '../../components/services/news.service';
 
 export default class MyComponent extends Component {
   static getInitialProps(serverData) {
@@ -17,14 +18,25 @@ export default class MyComponent extends Component {
   }
 
   componentDidMount() {
-    this.checkIfUserLoggedIn();
+    this.setInitialState()
   }
 
-  constructor() {
+  constructor(props) {
     super();
     this.bindMethods();
+    this.state = {
+      currentNewsId: get(props, 'currentNews._id'),
+      newsCategory: get(props, 'newsCategory')
+    }
   }
 
+  setInitialState() {
+    this.checkIfUserLoggedIn().then(() => {
+      this.addNewsToVisited(this.state.currentNewsId).then(() => {
+        this.removeVisitedNews();
+      });
+    });
+  }
 
   bindMethods() {
     this.closeModal = this.closeModal.bind(this);
@@ -38,7 +50,7 @@ export default class MyComponent extends Component {
       closeModal: this.closeModal,
       openModal: this.openModal,
       submitModal: this.submitModal,
-      logout: this.logout
+      logout: this.logout,
     }
   }
 
@@ -59,9 +71,7 @@ export default class MyComponent extends Component {
       });
       this.closeModal(type);
     }).catch(err => {
-      this.setState({
-        modalData: get(err, 'response.data.message')
-      });
+      this.setState({modalData: get(err, 'response.data.message')});
     });
   }
 
@@ -77,14 +87,44 @@ export default class MyComponent extends Component {
   }
 
   checkIfUserLoggedIn() {
-    checkIfUserLoggedIn()
-      .then(res => this.setState({user: get(res, 'data')}))
-      .catch(err => {})
+    return checkIfUserLoggedIn()
+      .then(res => {
+        this.setState({user: get(res, 'data')})
+        return Promise.resolve()
+      })
+      .catch(err => {
+        return Promise.resolve()
+      })
+  }
+
+  addNewsToVisited(newsId) {
+    if (!newsId) {
+      return Promise.resolve();
+    }
+
+    const { user } = this.state || {};
+    return addNewsToVisited(newsId, user).then(res => {
+      if (user) {
+        const userState = this.state.user;
+        userState['visitedNews'] = res
+        this.setState({
+          user: userState
+        })
+      }
+
+      return Promise.resolve();
+    })
+  }
+
+  removeVisitedNews() {
+    const { newsCategory, user } = this.state;
+    newsCategory.news = removeVisitedNews(newsCategory.news, user)
+    this.setState({newsCategory})
   }
 
   render() {
-    const { websiteConfiguration, newsCategory, navigation, sources, currentNews, originalUrl } = this.props;
-    const { modalTypeOpen, user, modalData } = this.state ? this.state : {};
+    const { websiteConfiguration, navigation, sources, currentNews, originalUrl } = this.props;
+    const { modalTypeOpen, user, modalData, newsCategory } = this.state ? this.state : {};
 
     return (
       <div>
