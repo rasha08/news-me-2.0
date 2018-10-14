@@ -18,7 +18,8 @@ const BaseLayout = (props) => {
     modalTypeOpen,
     modalData,
     user,
-    methods
+    methods,
+    showRightNavigation
   } = props.data;
   return (
     <div>
@@ -28,7 +29,10 @@ const BaseLayout = (props) => {
         openModal={methods.openModal}
         logout={methods.logout}
         navigation={navigation}
-        user={user} />
+        user={user}
+        websiteConfiguration={websiteConfiguration}
+      showRightNavigation={showRightNavigation}
+      />
 
       <Sidebar sources={sources} currentCategory={get(newsCategory,'categoryName')}/>
 

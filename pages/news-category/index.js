@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import BaseLayout from '../../components/base-layout-components/base-layout/base-layout';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { closeModal, submitModal } from '../../components/services/modal-helper.service';
-import { logout, checkIfUserLoggedIn } from '../../components/services/login.service';
+import { logout, checkIfUserLoggedIn, setUserDataForHidratation } from '../../components/services/login.service';
 import { addNewsToVisited, removeVisitedNews } from '../../components/services/news.service';
 
 export default class MyComponent extends Component {
@@ -26,13 +26,14 @@ export default class MyComponent extends Component {
     this.bindMethods();
     this.state = {
       currentNewsId: get(props, 'currentNews._id'),
-      newsCategory: get(props, 'newsCategory')
+      newsCategory: get(props, 'newsCategory'),
+      showRightNavigation: false
     }
   }
 
   setInitialState() {
     this.checkIfUserLoggedIn().then(() => {
-      this.addNewsToVisited(this.state.currentNewsId).then(() => {
+      this.addNewsToVisitedNews(this.state.currentNewsId).then(() => {
         this.removeVisitedNews();
       });
     });
@@ -97,34 +98,41 @@ export default class MyComponent extends Component {
       })
   }
 
-  addNewsToVisited(newsId) {
+  addNewsToVisitedNews(newsId) {
     if (!newsId) {
       return Promise.resolve();
     }
 
     const { user } = this.state || {};
-    return addNewsToVisited(newsId, user).then(res => {
-      if (user) {
-        const userState = this.state.user;
-        userState['visitedNews'] = res
-        this.setState({
-          user: userState
-        })
+    return addNewsToVisited(newsId, user)
+      .then(res => this.refreshUserState(newsId))
+      .catch(err => this.refreshUserState(newsId, err))
+  }
+
+  refreshUserState(newsId, err = null) {
+    const userState = get(this.state, 'user');
+    if (userState) {
+      if (!isEmpty(get(userState, 'visitedNews'))) {
+        userState['visitedNews'].push(newsId);
+      } else {
+        userState['visitedNews'] = [newsId];
       }
 
-      return Promise.resolve();
-    })
+      return this.setState({
+        user: userState
+      }, () => setUserDataForHidratation(userState))
+    }
   }
 
   removeVisitedNews() {
     const { newsCategory, user } = this.state;
     newsCategory.news = removeVisitedNews(newsCategory.news, user)
-    this.setState({newsCategory})
+    this.setState({newsCategory, showRightNavigation: true})
   }
 
   render() {
     const { websiteConfiguration, navigation, sources, currentNews, originalUrl } = this.props;
-    const { modalTypeOpen, user, modalData, newsCategory } = this.state ? this.state : {};
+    const { modalTypeOpen, user, modalData, newsCategory, showRightNavigation } = this.state ? this.state : {};
 
     return (
       <div>
@@ -140,6 +148,7 @@ export default class MyComponent extends Component {
               modalTypeOpen,
               modalData,
               user,
+              showRightNavigation,
               methods: this.getMethods()
             }}
           />

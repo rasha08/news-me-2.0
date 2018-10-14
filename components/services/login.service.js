@@ -2,6 +2,11 @@ import { get } from 'lodash';
 import { submitDataToApi } from './http.service';
 import { isEmailValid, isStringAplhaNumeric } from './validation.service';
 import { setKey, removeKey, getKey } from './local-storage.service';
+import {
+  setKey as setKeyInSession,
+  getKey as getKeyFromSession,
+  removeKey as removeKeyFromSession
+} from './session-storage.service';
 
 let loginData = {}
 let shouldSetRememeberMeToken = false;
@@ -45,10 +50,23 @@ const setRememeberMeTokenIfNeeded = (res) => {
   } else {
     removeKey('NEWS_TOKEN')
   }
+
+  setUserDataForHidratation(get(res, 'data'));
 }
 
 export const checkIfUserLoggedIn = () => {
-  const userToken =getKey('NEWS_TOKEN')
+  const user = getKeyFromSession('user');
+  if (user) {
+    return Promise.resolve({
+      data: user
+    })
+  }
+
+  return refreshUserData();
+}
+
+export const refreshUserData = () => {
+  const userToken = getKey('NEWS_TOKEN');
 
   return userToken ?
     submitDataToApi('loginWithToken', {token: userToken}) :
@@ -57,4 +75,13 @@ export const checkIfUserLoggedIn = () => {
     })
 }
 
-export const logout = () => removeKey('NEWS_TOKEN');
+export const setUserDataForHidratation = (userData) => {
+  setKeyInSession('user', userData)
+  
+  return Promise.resolve()
+}
+
+export const logout = () => {
+  removeKey('NEWS_TOKEN');
+  removeKeyFromSession('user');
+};

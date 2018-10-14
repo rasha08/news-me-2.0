@@ -21,8 +21,7 @@ body  header  div nav ul.navigation-right  a {
 #modal {
   display: block !important;
   position: fixed !important;
-  top: auto;
-  bottom: 5vw;
+  top: 15%;
   z-index: -999999999999999999 !important;
   opacity: 0 !important;
   transition: opacity ease-in 250ms;
@@ -378,7 +377,7 @@ section#boxes .box .card .img{
 section#boxes .card{
   width: 100%;
   height: 100%;
-  box-shadow:  0.1px 0.1px 0.1px rgba(87, 10, 10, 0.1);
+  box-shadow:  2px 1px 0.1px rgba(87, 10, 10, 0.5);
   margin-top: 13px;
   transition: box-shadow ease-in 300ms;
 }
