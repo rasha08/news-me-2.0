@@ -19,7 +19,8 @@ const BaseLayout = (props) => {
     modalData,
     user,
     methods,
-    showRightNavigation
+    showRightNavigation,
+    sideMenuOpen
   } = props.data;
   return (
     <div>
@@ -31,10 +32,11 @@ const BaseLayout = (props) => {
         navigation={navigation}
         user={user}
         websiteConfiguration={websiteConfiguration}
-      showRightNavigation={showRightNavigation}
+        showRightNavigation={showRightNavigation}
+        openSideMenu={methods.openSideMenu}
       />
 
-      <Sidebar sources={sources} currentCategory={get(newsCategory,'categoryName')}/>
+      <Sidebar sources={sources} sideMenuOpen={sideMenuOpen} currentCategory={get(newsCategory,'categoryName')}/>
 
       <MainPresenter
         newsCategory={newsCategory}

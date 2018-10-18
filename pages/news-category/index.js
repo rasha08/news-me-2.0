@@ -44,6 +44,7 @@ export default class MyComponent extends Component {
     this.openModal = this.openModal.bind(this);
     this.submitModal = this.submitModal.bind(this);
     this.logout = this.logout.bind(this);
+    this.openSideMenu = this.openSideMenu.bind(this);
   }
 
   getMethods() {
@@ -52,6 +53,7 @@ export default class MyComponent extends Component {
       openModal: this.openModal,
       submitModal: this.submitModal,
       logout: this.logout,
+      openSideMenu: this.openSideMenu
     }
   }
 
@@ -130,25 +132,19 @@ export default class MyComponent extends Component {
     this.setState({newsCategory, showRightNavigation: true})
   }
 
+  openSideMenu() {
+    this.setState({sideMenuOpen: !this.state.sideMenuOpen})
+  }
+
   render() {
-    const { websiteConfiguration, navigation, sources, currentNews, originalUrl } = this.props;
-    const { modalTypeOpen, user, modalData, newsCategory, showRightNavigation } = this.state ? this.state : {};
 
     return (
       <div>
         <div>
           <BaseLayout
             data={{
-              websiteConfiguration,
-              newsCategory,
-              navigation,
-              sources,
-              currentNews,
-              originalUrl,
-              modalTypeOpen,
-              modalData,
-              user,
-              showRightNavigation,
+              ...this.state,
+              ...this.props,
               methods: this.getMethods()
             }}
           />

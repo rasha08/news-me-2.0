@@ -2,13 +2,12 @@ import MenuButton from '../../helpers/header/menu-button/menu-button';
 import RightNavigation from '../../helpers/header/right-navigation/right-navigation';
 import MainNavigation from '../../helpers/header/main-navigation/main-navigation';
 
-const Header = (props) => {
-  const { navigation, openModal, user, logout, websiteConfiguration, showRightNavigation } = props;
+const Header = ({ navigation, openModal, user, logout, websiteConfiguration, showRightNavigation, openSideMenu }) => {
   return (
     <header>
       <div className="container">
         <nav>
-          <MenuButton />
+          <MenuButton openSideMenu={openSideMenu} />
 
           <a href="/" className="logo" id="logo"></a>
 

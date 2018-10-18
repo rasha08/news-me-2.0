@@ -2,12 +2,11 @@ import { map } from 'lodash';
 import Search from '../../helpers/sidebar/search/search';
 import NewsSourceButton from '../../helpers/sidebar/news-source-button/news-source-button';
 
-const Sidebar = (props) => {
-  const { sources, currentCategory } = props;
+const Sidebar = ({ sources, currentCategory, sideMenuOpen }) => {
   return (
       <section>
       <div className="container"> 
-        <div id="sidemenu">
+        <div id="sidemenu" className={sideMenuOpen ? 'open': ''}>
           <Search />
           <ul className="sidebuttons">
             {
