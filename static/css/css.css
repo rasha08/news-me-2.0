@@ -376,13 +376,19 @@ section .container-fluid#main {
 }
 
 section#boxes .box .card .img {
-  background-image: url('../img/loader-small.gif');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   min-width: 100%;
   min-height: 180px;
   width: 100%;
+
   height: 180px;
+  background-image: url('../img/loader-small.gif');
+  border-bottom: 1px solid #1e1e1e;
+}
+
+img {
+  color: transparent
 }
 
 section#boxes .box .card .img-container {
@@ -578,6 +584,14 @@ section#boxes .card-img-top {
   box-shadow: 1px 2px 1px 1px gray;
 }
 
+#boxes>div>button {
+  background-color: rgba(87, 10, 10, .6) !important;
+  color: snow !important;
+  margin-top: 30px !important;
+  margin-bottom: 60px !important;
+  margin-left: 1% !important;
+}
+
 @media(min-width: 1081px) {
   .navigation-main {
     position: fixed;
@@ -598,10 +612,6 @@ section#boxes .card-img-top {
 
 @media(max-width: 1080px) {
   .navigation-main {
-<<<<<<< Updated upstream
-    position:fixed;
-    bottom: 0px;
-=======
     position: fixed;
     bottom: 0px;
     width: 100vw;
@@ -657,18 +667,13 @@ section#boxes .card-img-top {
 @media(max-width: 425px) {
   .navigation-main {
     position: fixed;
-    bottom: -2px;
->>>>>>> Stashed changes
+    bottom: 0px;
     width: 100vw;
     height: 50px;
     background-image: linear-gradient(to bottom, #342f30, #570a0a);
     left: 0px !important;
-<<<<<<< Updated upstream
-    margin-left:0px;
-    padding-bottom: 5px;
-=======
     margin-left: 0px;
->>>>>>> Stashed changes
+    padding-bottom: 5px;
   }
 
   header {
@@ -676,20 +681,45 @@ section#boxes .card-img-top {
     position: fixed;
   }
 
-<<<<<<< Updated upstream
-  header nav .navigation-main li a{
-=======
-
   header nav .navigation-main li a {
->>>>>>> Stashed changes
     margin-top: 10px;
     position: absolute;
-    height: 20px;
+    height: 50px;
     text-align: center;
     margin-left: -3%;
     color: transparent;
   }
-  
+
+  header nav .navigation-main li a::after {
+    color: transparent;
+  }
+
+  header nav .navigation-main li.navigation-item,
+  header nav .navigation-main li.navigation-item a {
+    width: 10vw;
+    padding: 0%;
+    margin: 0%
+  }
+
+  header nav .navigation-main li.navigation-item {
+    margin-left: 10vw;
+  }
+
+  header nav .navigation-main li.navigation-item a {
+    margin-left: -15vw;
+    position: absolute;
+    width: 20vw;
+  }
+
+  header nav .navigation-main li a i {
+    color: snow;
+    position: absolute;
+    top: 17%;
+    left: 26%;
+    width: 10vw;
+
+  }
+
   header nav .navigation-main {
     height: 50px;
   }
@@ -773,8 +803,7 @@ section#boxes .card-img-top {
     width: 100vw !important;
   }
 
-<<<<<<< Updated upstream
-  .navigation-right{
+  .navigation-right {
     display: none;
   }
 
@@ -782,14 +811,6 @@ section#boxes .card-img-top {
     width: 109% !important;
     margin-left: -4%;
 
-=======
-  .logo {
-    display: none;
-  }
-
-  .navigation-right {
-    display: none;
->>>>>>> Stashed changes
   }
 
   section#mobcards .card {
@@ -806,12 +827,7 @@ section#boxes .card-img-top {
     border-bottom: 1px #000 solid;
   }
 
-<<<<<<< Updated upstream
-  section#mobcards .card .mobheader{
-=======
-
   section#mobcards .card .mobheader {
->>>>>>> Stashed changes
     border-bottom: 1px #000 solid;
     text-align: center;
     height: 10%;
@@ -859,9 +875,8 @@ section#boxes .card-img-top {
   #menu-button {
     display: block;
     position: fixed;
-<<<<<<< Updated upstream
-    top:-35px;
-    left:20px;
+    top: -35px;
+    left: 20px;
     overflow: hidden;
     width: 80px !important;
     background-size: 550%;
@@ -878,16 +893,12 @@ section#boxes .card-img-top {
     left: 1%;
   }
 
-  #boxes.single-news  h1 {
+  #boxes.single-news h1 {
     font-size: 1.6rem;
     font-weight: bold;
   }
 
-#boxes.single-news .card-body a {
+  #boxes.single-news .card-body a {
     margin-left: 20px;
-=======
-    top: 0px;
-    left: 30px;
->>>>>>> Stashed changes
   }
 }

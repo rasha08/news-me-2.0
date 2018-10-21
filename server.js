@@ -13,7 +13,9 @@ const {
   reverse,
   remove,
   cloneDeep,
-  orderBy
+  orderBy,
+  each,
+  flatten
 } = require('lodash');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -139,7 +141,7 @@ let prepareResponseForSource = (categorySlug, source) => {
 
   if (newsCategory) {
     newsCategory['news'] = filter(
-      get(newsCategory, 'news'),
+      flatten(map(newsCategories, category => get(category, 'news'))),
       singleNews => kebabCase(get(singleNews, 'source')) === source
     );
   } else {

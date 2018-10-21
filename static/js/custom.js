@@ -2,11 +2,16 @@
 document.addEventListener(
   'DOMContentLoaded',
   function() {
-    setTimeout(() => {
-      [].forEach.call(document.getElementsByTagName('img'), element => {
-        element.setAttribute('src', element.getAttribute('data-src'));
-      });
-    }, 2500);
+    LoadImages();
   },
   false
 );
+
+window.LoadImages = function() {
+  console.log('LOADING IMAGES');
+  setTimeout(() => {
+    [].forEach.call(document.getElementsByTagName('img'), element => {
+      element.setAttribute('src', element.getAttribute('data-src'));
+    });
+  }, 100);
+};
