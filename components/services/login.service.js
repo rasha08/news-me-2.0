@@ -8,7 +8,7 @@ import {
   removeKey as removeKeyFromSession
 } from './session-storage.service';
 
-let loginData = {}
+let loginData = {};
 let shouldSetRememeberMeToken = false;
 
 export const updateLoginObject = (value, key) => {
@@ -18,12 +18,12 @@ export const updateLoginObject = (value, key) => {
   }
 
   loginData[key] = value;
-}
+};
 
 export const resetLoginData = () => {
   loginData = {};
   shouldSetRememeberMeToken = false;
-}
+};
 
 export const submitLoginData = () => {
   if (isLoginDataValid()) {
@@ -36,50 +36,53 @@ export const submitLoginData = () => {
   }
 
   return new Promise((resolve, reject) => {
-    reject({data:{message: 'All fields must be valid!'}});
-  })
-}
+    reject({ data: { message: 'All fields must be valid!' } });
+  });
+};
 
 const isLoginDataValid = () => {
-  return  isEmailValid(get(loginData, 'email')) && isStringAplhaNumeric(get(loginData, 'password'));
-}
+  return (
+    isEmailValid(get(loginData, 'email')) &&
+    isStringAplhaNumeric(get(loginData, 'password'))
+  );
+};
 
-const setRememeberMeTokenIfNeeded = (res) => {
+const setRememeberMeTokenIfNeeded = res => {
   if (shouldSetRememeberMeToken) {
     setKey('NEWS_TOKEN', get(res, 'data._id'));
   } else {
-    removeKey('NEWS_TOKEN')
+    removeKey('NEWS_TOKEN');
   }
 
   setUserDataForHidratation(get(res, 'data'));
-}
+};
 
 export const checkIfUserLoggedIn = () => {
   const user = getKeyFromSession('user');
   if (user) {
     return Promise.resolve({
       data: user
-    })
+    });
   }
 
   return refreshUserData();
-}
+};
 
 export const refreshUserData = () => {
   const userToken = getKey('NEWS_TOKEN');
 
-  return userToken ?
-    submitDataToApi('loginWithToken', {token: userToken}) :
-    new Promise((resolve, reject) => {
-      reject();
-    })
-}
+  return userToken
+    ? submitDataToApi('loginWithToken', { token: userToken })
+    : new Promise((resolve, reject) => {
+        reject();
+      });
+};
 
-export const setUserDataForHidratation = (userData) => {
-  setKeyInSession('user', userData)
-  
-  return Promise.resolve()
-}
+export const setUserDataForHidratation = userData => {
+  setKeyInSession('user', userData);
+
+  return Promise.resolve();
+};
 
 export const logout = () => {
   removeKey('NEWS_TOKEN');

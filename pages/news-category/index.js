@@ -1,9 +1,19 @@
 import { Component } from 'react';
 import BaseLayout from '../../components/base-layout-components/base-layout/base-layout';
 import { get, isEmpty } from 'lodash';
-import { closeModal, submitModal } from '../../components/services/modal-helper.service';
-import { logout, checkIfUserLoggedIn, setUserDataForHidratation } from '../../components/services/login.service';
-import { addNewsToVisited, removeVisitedNews } from '../../components/services/news.service';
+import {
+  closeModal,
+  submitModal
+} from '../../components/services/modal-helper.service';
+import {
+  logout,
+  checkIfUserLoggedIn,
+  setUserDataForHidratation
+} from '../../components/services/login.service';
+import {
+  addNewsToVisited,
+  removeVisitedNews
+} from '../../components/services/news.service';
 
 export default class MyComponent extends Component {
   static getInitialProps(serverData) {
@@ -18,17 +28,16 @@ export default class MyComponent extends Component {
   }
 
   componentDidMount() {
-    this.setInitialState()
+    this.setInitialState();
   }
 
   constructor(props) {
     super();
-    this.bindMethods();
     this.state = {
       currentNewsId: get(props, 'currentNews._id'),
       newsCategory: get(props, 'newsCategory'),
       showRightNavigation: false
-    }
+    };
   }
 
   setInitialState() {
@@ -39,43 +48,38 @@ export default class MyComponent extends Component {
     });
   }
 
-  bindMethods() {
-    this.closeModal = this.closeModal.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.submitModal = this.submitModal.bind(this);
-    this.logout = this.logout.bind(this);
-    this.openSideMenu = this.openSideMenu.bind(this);
-  }
-
   getMethods() {
-    return  {
-      closeModal: this.closeModal,
-      openModal: this.openModal,
-      submitModal: this.submitModal,
-      logout: this.logout,
-      openSideMenu: this.openSideMenu
-    }
+    return {
+      closeModal: this.closeModal.bind(this),
+      openModal: this.openModal.bind(this),
+      submitModal: this.submitModal.bind(this),
+      logout: this.logout.bind(this),
+      openSideMenu: this.openSideMenu.bind(this),
+      detectChanges: this.detectChanges.bind(this)
+    };
   }
 
   closeModal() {
     this.setState({
       modalTypeOpen: '',
-      modalData:''
+      modalData: ''
     });
 
-    closeModal(this.state.modalTypeOpen)
+    closeModal(this.state.modalTypeOpen);
   }
 
   submitModal(type) {
-    submitModal(type).then(res => {
-      this.setState({
-        user: get(res, 'data'),
-        modalData:''
+    submitModal(type)
+      .then(res => {
+        this.setState({
+          user: get(res, 'data'),
+          modalData: ''
+        });
+        this.closeModal(type);
+      })
+      .catch(err => {
+        this.setState({ modalData: get(err, 'response.data.message') });
       });
-      this.closeModal(type);
-    }).catch(err => {
-      this.setState({modalData: get(err, 'response.data.message')});
-    });
   }
 
   openModal(modalTypeOpen) {
@@ -85,19 +89,19 @@ export default class MyComponent extends Component {
   }
 
   logout() {
-    this.setState({user: null});
+    this.setState({ user: null });
     logout();
   }
 
   checkIfUserLoggedIn() {
     return checkIfUserLoggedIn()
       .then(res => {
-        this.setState({user: get(res, 'data')})
-        return Promise.resolve()
+        this.setState({ user: get(res, 'data') });
+        return Promise.resolve();
       })
       .catch(err => {
-        return Promise.resolve()
-      })
+        return Promise.resolve();
+      });
   }
 
   addNewsToVisitedNews(newsId) {
@@ -108,7 +112,7 @@ export default class MyComponent extends Component {
     const { user } = this.state || {};
     return addNewsToVisited(newsId, user)
       .then(res => this.refreshUserState(newsId))
-      .catch(err => this.refreshUserState(newsId, err))
+      .catch(err => this.refreshUserState(newsId, err));
   }
 
   refreshUserState(newsId, err = null) {
@@ -120,24 +124,31 @@ export default class MyComponent extends Component {
         userState['visitedNews'] = [newsId];
       }
 
-      return this.setState({
-        user: userState
-      }, () => setUserDataForHidratation(userState))
+      return this.setState(
+        {
+          user: userState
+        },
+        () => setUserDataForHidratation(userState)
+      );
     }
   }
 
   removeVisitedNews() {
     const { newsCategory, user } = this.state;
-    newsCategory.news = removeVisitedNews(newsCategory.news, user)
-    this.setState({newsCategory, showRightNavigation: true})
+    newsCategory.news = removeVisitedNews(newsCategory.news, user);
+    this.setState({ newsCategory, showRightNavigation: true });
   }
 
   openSideMenu() {
-    this.setState({sideMenuOpen: !this.state.sideMenuOpen})
+    this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
+  }
+
+  detectChanges() {
+    this.setState({});
+    window.LoadImages();
   }
 
   render() {
-
     return (
       <div>
         <div>
@@ -149,7 +160,7 @@ export default class MyComponent extends Component {
             }}
           />
         </div>
-       <script src="/static/js/custom.js"></script>
+        <script src="/static/js/custom.js" />
       </div>
     );
   }

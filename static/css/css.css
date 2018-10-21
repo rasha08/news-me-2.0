@@ -1,4 +1,5 @@
-html, body{
+html,
+body {
   margin: 0;
   padding: 0;
   overflow: hidden !important;
@@ -6,7 +7,7 @@ html, body{
   width: 100vw !important;
 }
 
-body  header  div nav ul.navigation-right  a {
+body header div nav ul.navigation-right a {
   color: snow !important;
 }
 
@@ -53,12 +54,14 @@ body  header  div nav ul.navigation-right  a {
 }
 
 /* Track */
-::-webkit-scrollbar-track, ::-webkit-scrollbar-track:horizontal {
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track:horizontal {
   background: #f1f1f1;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:horizontal {
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:horizontal {
   background: rgba(0, 0, 0, .34);
 }
 
@@ -68,32 +71,41 @@ body  header  div nav ul.navigation-right  a {
 }
 
 @keyframes headerBackground {
-    0%   {opacity: 0.9}
-    50%  {opacity: 1}
-    100% {opacity: 0.9}
+  0% {
+    opacity: 0.9
+  }
+
+  50% {
+    opacity: 1
+  }
+
+  100% {
+    opacity: 0.9
+  }
 }
 
 
-header{
+header {
   z-index: 9999;
   width: 100%;
-  height:100px;
+  height: 100px;
   position: fixed;
   background-image: linear-gradient(to bottom, #570a0a, #342f30);
   font-size: 15px;
   box-shadow: 2px 3px 3px 2px #1e1e1e;
-  -webkit-animation: headerBackground 5s infinite; /* Safari 4.0 - 8.0 */
+  -webkit-animation: headerBackground 5s infinite;
+  /* Safari 4.0 - 8.0 */
   animation: headerBackground 5s infinite;
 }
 
 
-.logo{
-  float:left;
+.logo {
+  float: left;
   margin-top: 10px;
   margin-left: 60px;
   position: absolute;
   left: 10px;
-  top:10px;
+  top: 10px;
   height: 50px;
   width: 300px;
   background-image: url(../img/icons.svg);
@@ -101,46 +113,46 @@ header{
 }
 
 
-.container{
+.container {
   margin: auto;
   overflow: hidden;
 }
 
 
-header nav{
+header nav {
   float: right;
-  margin-top:25px;
+  margin-top: 25px;
 }
 
 
-header ul{
+header ul {
   margin: 0;
   padding: 0;
 }
 
 
-header a{
+header a {
   text-decoration: none;
   text-transform: uppercase;
   color: #ffffff;
 }
 
 
-a:hover{
+a:hover {
   color: #d8a97c;
   opacity: 0.8;
   text-decoration: none;
-  text-shadow:1px 1px 1px rgba(0,0,0,.6);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .6);
 }
 
 
-header li{
+header li {
   display: inline;
   margin: 0px 7px 0 7px;
 }
 
 
-.navigation-main{
+.navigation-main {
   left: 2vw;
   margin-top: 20px;
   width: 100vw;
@@ -148,7 +160,7 @@ header li{
 }
 
 
-.navigation-right{
+.navigation-right {
   position: fixed;
   top: 10px;
   right: 40px;
@@ -156,7 +168,7 @@ header li{
 }
 
 
-section .container #sidemenu{
+section .container #sidemenu {
   top: 104px;
   overflow-y: auto;
   position: fixed;
@@ -167,94 +179,97 @@ section .container #sidemenu{
   box-shadow: 0px 0px 0px 2px #1e1e1e;
 }
 
-section .container #sidemenu .button{
-    display: inline-block;
-    border-radius: 4px;
-    background: #570a0a; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #570a0a, #342f30); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #570a0a, #342f30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: calc(11px + 0.5vw);
-    padding: 1%;
-    width: 90% !important;
-    margin-left: 5%;
-    height: 45px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-    outline: none;
-    box-shadow:  0px 2px 0px 2px #1e1e1e
-  }
+section .container #sidemenu .button {
+  display: inline-block;
+  border-radius: 4px;
+  background: #570a0a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #570a0a, #342f30);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #570a0a, #342f30);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: calc(11px + 0.5vw);
+  padding: 1%;
+  width: 90% !important;
+  margin-left: 5%;
+  height: 45px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  outline: none;
+  box-shadow: 0px 2px 0px 2px #1e1e1e
+}
 
 
-  section .container #sidemenu .button:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-  }
+section .container #sidemenu .button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
 
 
-  .button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
 
-  .button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
 
 
-  .button:hover span {
-    padding-right: 25px;
-  }
+.button:hover span {
+  padding-right: 25px;
+}
 
 
-  .button:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 
 
-  section .container #sidemenu .sidebuttons{
-    padding-left: 10px;
-  }
+section .container #sidemenu .sidebuttons {
+  padding-left: 10px;
+}
 
 
-section .search-box{
-  display:inline-block;
-  padding-bottom:10px;
+section .search-box {
+  display: inline-block;
+  padding-bottom: 10px;
 }
 
 
 
 
-section .container #sidemenu .search-bar{
+section .container #sidemenu .search-bar {
   margin-top: 20px;
-    margin-left: 15px;
-    border: 1px #570a0a solid;
-    box-shadow: 0 8px 10px 0 rgba(0,0,0,.3), 0 10px 25px 0 #570a0a, inset 1px 1px 2px rgba(0, 0, 0, .4), inset 0px 1px 2px rgba(0, 0, 0, .4);
-    outline: none;
-    width: 143%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding: 10px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+  margin-left: 15px;
+  border: 1px #570a0a solid;
+  box-shadow: 0 8px 10px 0 rgba(0, 0, 0, .3), 0 10px 25px 0 #570a0a, inset 1px 1px 2px rgba(0, 0, 0, .4), inset 0px 1px 2px rgba(0, 0, 0, .4);
+  outline: none;
+  width: 143%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 
-section .container ul{
+section .container ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -262,7 +277,7 @@ section .container ul{
 }
 
 
-section .container a{
+section .container a {
   text-decoration: none;
   margin-left: 140px;
   text-transform: uppercase;
@@ -270,12 +285,12 @@ section .container a{
 }
 
 
-section .container a:hover{
+section .container a:hover {
   color: #EAA4A4;
 }
 
 
-section .container li{
+section .container li {
   padding-top: 20px;
   border: 1px #000 solid;
   padding-bottom: 20px;
@@ -283,7 +298,7 @@ section .container li{
 
 
 
-section .container-fluid #mainbanner{
+section .container-fluid #mainbanner {
   border: none;
   height: 100%;
   margin-left: -0.71vw;
@@ -294,7 +309,7 @@ section .container-fluid #mainbanner{
   background-color: rgba(52, 47, 48, 0.8);
 }
 
-section .container-fluid #mainbanner .banner-image{
+section .container-fluid #mainbanner .banner-image {
   position: relative;
   left: -40%;
   height: 100%;
@@ -324,7 +339,7 @@ section .container-fluid #mainbanner .banner-description {
 }
 
 
-section .container-fluid#main{
+section .container-fluid#main {
   width: 78% !important;
   height: 150px;
   top: 120px;
@@ -351,7 +366,7 @@ section .container-fluid#main{
   left: 22%;
 }
 
-#boxes .container .box{
+#boxes .container .box {
   min-width: 300px;
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -360,12 +375,18 @@ section .container-fluid#main{
   margin-top: 0%;
 }
 
-section#boxes .box .card .img{
+section#boxes .box .card .img {
+  background-image: url('../img/loader-small.gif');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-width: 100%;
+  min-height: 180px;
   width: 100%;
-  height:180px;
-  background-image: url('../img/3.jpg');
-  border-bottom: 1px solid #1e1e1e;
+  height: 180px;
+}
 
+section#boxes .box .card .img-container {
+  border-bottom: 1px solid #1e1e1e;
 }
 
 #boxes .container {
@@ -374,20 +395,20 @@ section#boxes .box .card .img{
 
 
 
-section#boxes .card{
+section#boxes .card {
   width: 100%;
   height: 100%;
-  box-shadow:  2px 1px 0.1px rgba(87, 10, 10, 0.5);
+  box-shadow: 2px 1px 0.1px rgba(87, 10, 10, 0.5);
   margin-top: 13px;
   transition: box-shadow ease-in 300ms;
 }
 
 section#boxes .card:hover {
-  box-shadow:  1px 2px 1px 1px rgba(87, 10, 10, 0.6);
+  box-shadow: 1px 2px 1px 1px rgba(87, 10, 10, 0.6);
 }
 
-section#boxes .container .box .card-title{
-  text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+section#boxes .container .box .card-title {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, .6);
   height: 80px !important;
   overflow: hidden;
 }
@@ -412,7 +433,7 @@ section#boxes .card .card-header {
   background-image: linear-gradient(to bottom, rgba(87, 10, 10, 0.9), rgba(87, 10, 10, 0.7)) !important;
 }
 
-section#boxes .card .card-footer{
+section#boxes .card .card-footer {
   box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
   background-image: linear-gradient(to bottom, rgba(87, 10, 10, 0.7), rgba(87, 10, 10, 0.3)) !important;
 }
@@ -423,11 +444,11 @@ section#boxes .card .card-header .source-name {
   color: snow;
 }
 
-section#boxes .btn{
+section#boxes .btn {
   margin: 0%;
   width: 110%;
   margin-left: -5%;
-  background-color:transparent;
+  background-color: transparent;
   border: none;
   box-shadow: 0px 0px 0.4px 0.1px rgba(87, 10, 10, 0.2);
   transition: box-shadow ease-in 300ms;
@@ -451,71 +472,71 @@ section#boxes .card-img-top {
 
 
 
-.responsive-slide-manu .open-slide svg{
+.responsive-slide-manu .open-slide svg {
   display: none;
 
 }
 
-.container .news-page{
+.container .news-page {
   margin-top: 150px;
   margin-left: 100px;
   width: 50%;
   height: 70%;
   position: absolute;
   box-shadow: 0 3px 2px #777;
-	background: none repeat scroll 0 0 #E9E9E9;
+  background: none repeat scroll 0 0 #E9E9E9;
 
 }
 
-.container .page-header{
+.container .page-header {
   height: 10%;
   border-bottom: 1px #000 solid;
   color: #fff;
   text-align: center;
 }
 
-.container .page-showcase{
+.container .page-showcase {
   height: 80%;
   width: 100%;
   border-bottom: 1px #000 solid;
   display: flex;
 }
 
-.container .page-info{
+.container .page-info {
   width: 55%;
   margin-top: 4%;
   padding-left: 2%;
 }
 
-.container .page-img{
+.container .page-img {
   width: 40%;
   height: 100%;
 }
 
 
-.container .pimg{
-  background-image:url('../img/3.jpg');
+.container .pimg {
+  background-image: url('../img/3.jpg');
   width: 100%;
   height: 60%;
   margin: 8% 3% 0 2%;
 
 }
 
-.container .page-img-text{
+.container .page-img-text {
   padding: 5px 5px 0 5px;
   text-align: center;
-  color:#2b2b2b;
+  color: #2b2b2b;
   font-style: italic;
 }
 
-.container .page-footer{
- height: 10%;
- text-align: center;
+.container .page-footer {
+  height: 10%;
+  text-align: center;
 }
 
-.container .page-footer .page-btn{
+.container .page-footer .page-btn {
   width: 40%;
-  margin-top:1%;
+  margin-top: 1%;
   color: #fff;
   background-color: rgba(50, 115, 220, 0.3);
   outline: none;
@@ -523,7 +544,7 @@ section#boxes .card-img-top {
   box-shadow: 1px 2px 0px 0 #424242;
 }
 
-.container .page-footer .page-btn:hover{
+.container .page-footer .page-btn:hover {
   background-color: rgba(0, 34, 88, 0.3);
   transition: 2s;
   color: #000;
@@ -539,22 +560,26 @@ section#boxes .card-img-top {
   z-index: 9999999999999999999999999999;
 }
 
-.modal-header, .modal-footer {
+.modal-header,
+.modal-footer {
   background-image: linear-gradient(to bottom, #570a0a, #342f30) !important;
   color: snow !important;
 }
 
 .modal .modal-footer .btn {
-  background: #570a0a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #570a0a, #342f30); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #570a0a, #342f30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #570a0a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #570a0a, #342f30);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #570a0a, #342f30);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   outline: none !important;
   border: none !important;
   box-shadow: 1px 2px 1px 1px gray;
 }
 
-@media(min-width: 1081px){
-  .navigation-main{
+@media(min-width: 1081px) {
+  .navigation-main {
     position: fixed;
     top: 50px;
     left: 2vw;
@@ -571,66 +596,79 @@ section#boxes .card-img-top {
   }
 }
 
-@media(max-width: 1080px ){
-    .navigation-main {
-      position:fixed;
-      bottom:0px;
-      width: 100vw;
-      height: 40px;
-      background-image: linear-gradient(to bottom, #342f30, #570a0a);
-      left: 0px !important;
-      margin-left:0px;
-    }
-
-    header nav .navigation-main{
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      text-align: center;
-    }
-
-    header nav .navigation-main li {
-      border-right: 1px #fff solid;
-    }
-    header nav .navigation-main li a{
-      margin-top: 10px;
-      position: absolute;
-      height: 20px;
-      text-align: center;
-      margin-left: -3%;
-    }
-    header nav .navigation-main li:last-child a{
-      margin-left: -5%;
-
-    }
-    header nav .navigation-main li:last-child{
-      border-right:none;
-    }
-    header nav .navigation-main li:nth-child(3) a{
-      margin-left: -5%;
-    }
-
-    .responsive-slide-manu .open-slide svg {
-      display: block;
-      position: fixed;
-      top:30px;
-      left:30px;
-    }
-
-    section .mob_prezenter{
-      display:none;
-    }
-}
-
-@media(max-width: 425px){
+@media(max-width: 1080px) {
   .navigation-main {
+<<<<<<< Updated upstream
     position:fixed;
     bottom: 0px;
+=======
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    height: 40px;
+    background-image: linear-gradient(to bottom, #342f30, #570a0a);
+    left: 0px !important;
+    margin-left: 0px;
+  }
+
+  header nav .navigation-main {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+  }
+
+  header nav .navigation-main li {
+    border-right: 1px #fff solid;
+  }
+
+  header nav .navigation-main li a {
+    margin-top: 10px;
+    position: absolute;
+    height: 20px;
+    text-align: center;
+    margin-left: -3%;
+  }
+
+  header nav .navigation-main li:last-child a {
+    margin-left: -5%;
+
+  }
+
+  header nav .navigation-main li:last-child {
+    border-right: none;
+  }
+
+  header nav .navigation-main li:nth-child(3) a {
+    margin-left: -5%;
+  }
+
+  .responsive-slide-manu .open-slide svg {
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 30px;
+  }
+
+  section .mob_prezenter {
+    display: none;
+  }
+}
+
+@media(max-width: 425px) {
+  .navigation-main {
+    position: fixed;
+    bottom: -2px;
+>>>>>>> Stashed changes
     width: 100vw;
     height: 50px;
     background-image: linear-gradient(to bottom, #342f30, #570a0a);
     left: 0px !important;
+<<<<<<< Updated upstream
     margin-left:0px;
     padding-bottom: 5px;
+=======
+    margin-left: 0px;
+>>>>>>> Stashed changes
   }
 
   header {
@@ -638,7 +676,12 @@ section#boxes .card-img-top {
     position: fixed;
   }
 
+<<<<<<< Updated upstream
   header nav .navigation-main li a{
+=======
+
+  header nav .navigation-main li a {
+>>>>>>> Stashed changes
     margin-top: 10px;
     position: absolute;
     height: 20px;
@@ -702,7 +745,7 @@ section#boxes .card-img-top {
   }
 
 
-  section #sidemenu{
+  section #sidemenu {
     top: 61px !important;
     width: 100vw !important;
     transform: translateX(-110vw);
@@ -710,7 +753,7 @@ section#boxes .card-img-top {
     z-index: 999999999999;
   }
 
-  section #sidemenu.open{
+  section #sidemenu.open {
     transform: translateX(0);
   }
 
@@ -718,18 +761,19 @@ section#boxes .card-img-top {
     height: 20px !important;
   }
 
-  section #mainbanner{
-    display:none;
+  section #mainbanner {
+    display: none;
 
   }
 
-  section#boxes{
+  section#boxes {
     position: relative;
     left: 0px;
     margin-top: 68px;
     width: 100vw !important;
   }
 
+<<<<<<< Updated upstream
   .navigation-right{
     display: none;
   }
@@ -738,9 +782,17 @@ section#boxes .card-img-top {
     width: 109% !important;
     margin-left: -4%;
 
+=======
+  .logo {
+    display: none;
   }
 
-  section#mobcards .card{
+  .navigation-right {
+    display: none;
+>>>>>>> Stashed changes
+  }
+
+  section#mobcards .card {
     display: inline-block;
     height: 550px;
     margin: 1rem;
@@ -749,12 +801,17 @@ section#boxes .card-img-top {
     margin-left: 1%;
     margin-right: 1%;
     margin-top: 120px;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
     border-top: 1px #000 solid;
     border-bottom: 1px #000 solid;
   }
 
+<<<<<<< Updated upstream
   section#mobcards .card .mobheader{
+=======
+
+  section#mobcards .card .mobheader {
+>>>>>>> Stashed changes
     border-bottom: 1px #000 solid;
     text-align: center;
     height: 10%;
@@ -762,14 +819,14 @@ section#boxes .card-img-top {
   }
 
 
-  section#mobcards .card .showcase{
+  section#mobcards .card .showcase {
     height: 80%;
     border-bottom: 1px #000 solid;
     text-align: center;
     background-color: #fafafa;
   }
 
-  section#mobcards .card .showcase #mobimg{
+  section#mobcards .card .showcase #mobimg {
     background-image: url('../img/3.jpg');
     width: 80%;
     height: 60%;
@@ -779,14 +836,14 @@ section#boxes .card-img-top {
   }
 
 
-  section#mobcards .card .mobfooter{
+  section#mobcards .card .mobfooter {
     height: 10%;
     text-align: center;
-    background-color: #dedede ;
+    background-color: #dedede;
   }
 
 
-  section#mobcards .card .mobfooter .mobbtn{
+  section#mobcards .card .mobfooter .mobbtn {
     width: 99%;
     margin-top: 5px;
     color: #570a0a;
@@ -795,13 +852,14 @@ section#boxes .card-img-top {
   }
 
 
-  section .container-fluid{
+  section .container-fluid {
     display: none;
   }
 
   #menu-button {
     display: block;
     position: fixed;
+<<<<<<< Updated upstream
     top:-35px;
     left:20px;
     overflow: hidden;
@@ -827,7 +885,9 @@ section#boxes .card-img-top {
 
 #boxes.single-news .card-body a {
     margin-left: 20px;
+=======
+    top: 0px;
+    left: 30px;
+>>>>>>> Stashed changes
   }
 }
-
-
