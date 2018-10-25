@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/';
+const API_URL = 'http://api-news-me.ml/';
 const REGISTRATION = 'public/users/register';
 const LOGIN = 'public/users/login';
 const LOGIN_WITH_TOKEN = 'public/users/login-with-token';

@@ -5,6 +5,7 @@ body {
   overflow: hidden !important;
   overflow-y: auto !important;
   width: 100vw !important;
+  user-select: none !important;
 }
 
 body header div nav ul.navigation-right a {
@@ -239,7 +240,7 @@ section .container #sidemenu .search-bar {
   border: 1px #570a0a solid;
   box-shadow: 0 8px 10px 0 rgba(0, 0, 0, 0.3), 0 10px 25px 0 #570a0a, inset 1px 1px 2px rgba(0, 0, 0, 0.4), inset 0px 1px 2px rgba(0, 0, 0, 0.4);
   outline: none;
-  width: 143%;
+  width: 120%;
   border-top: none;
   border-left: none;
   border-right: none;
@@ -550,7 +551,7 @@ section#boxes .card-img-top {
   background-color: rgba(87, 10, 10, 0.6) !important;
   color: snow !important;
   margin-top: 30px !important;
-  margin-bottom: 60px !important;
+  margin-bottom: 10px !important;
   margin-left: 1% !important;
 }
 
@@ -600,7 +601,7 @@ section#boxes .card-img-top {
   }
 
   #boxes .container .box {
-    min-width: 250px;
+    min-width: 275px;
   }
 
   header nav .navigation-main {
@@ -616,8 +617,8 @@ section#boxes .card-img-top {
   header nav .navigation-main li a {
     margin-top: 5px;
     position: absolute;
-    text-align: center;
-    margin-left: -5%;
+    margin-left: -7%;
+    width: 15vw !important;
     color: transparent;
     overflow: hidden;
     padding-bottom: 20px;
@@ -626,22 +627,9 @@ section#boxes .card-img-top {
   header nav .navigation-main li a i {
     color: snow;
     position: absolute;
-    top: 17%;
-    left: 26%;
-  }
-
-  header nav .navigation-main li:last-child a {
-    margin-left: -5%;
-    margin-top: 0px;
-
-  }
-
-  header nav .navigation-main li:last-child {
-    border-right: none;
-  }
-
-  header nav .navigation-main li:nth-child(3) a {
-    margin-left: -5%;
+    top: 10%;
+    left: 25%;
+    width: auto
   }
 
   .responsive-slide-manu .open-slide svg {
@@ -653,6 +641,25 @@ section#boxes .card-img-top {
 
   section .mob_prezenter {
     display: none;
+  }
+
+
+  #boxes.single-news {
+    margin-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  #boxes.single-news h1 {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+
+  #boxes.single-news .card-body a {
+    margin-left: 20px;
+  }
+
+  section#boxes {
+    padding-bottom: 65px;
   }
 }
 
@@ -840,5 +847,8 @@ section#boxes .card-img-top {
 
   #boxes.single-news .card-body a {
     margin-left: 20px;
+  }
+  section .container #sidemenu .search-bar {
+    width: 150%;
   }
 }

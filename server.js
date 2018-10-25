@@ -8,6 +8,7 @@ const {
   find,
   startCase,
   toUpper,
+  uniq,
   uniqBy,
   kebabCase,
   reverse,
@@ -15,11 +16,16 @@ const {
   cloneDeep,
   orderBy,
   each,
-  flatten
+  flatten,
+  escape,
+  includes,
+  toLower
 } = require('lodash');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
+
+console.log(dev ? 'server is in development mode' : 'server is in production mode');
 const nextApp = next({ dev });
 const nextHandle = nextApp.getRequestHandler();
 
@@ -43,6 +49,18 @@ nextApp.prepare().then(() => {
         res,
         '/news-category',
         prepareResponseForCategory(req.params.category)
+      );
+    });
+
+    server.get('/today-news/search/:query', (req, res) => {
+      const { query } = req.params;
+      console.log(`Requesting search page `);
+
+      nextApp.render(
+        req,
+        res,
+        '/news-category',
+        prepareSearchResultsNewsResponse(escape(query))
       );
     });
 
@@ -217,3 +235,30 @@ let findSingleNewsBySlug = (newsCategory, newsSlug) => {
     singleNews => get(singleNews, 'newsTitleSlug') === newsSlug
   );
 };
+
+const prepareSearchResultsNewsResponse = query => {
+  const newsCategory = {
+    categoryName: null,
+    news: []
+  }
+  const resultsFromTitle = []
+  const resultsFromDescription = []
+
+  each(newsCategories, category => each(category.news, singleNews => {
+    if (includes(toLower(singleNews.title), query)) {
+      resultsFromTitle.push(singleNews)
+    } else if (includes(toLower(singleNews.description), query)) {
+      resultsFromDescription.push(singleNews)
+    }
+  }))
+
+  newsCategory.news = uniq([...resultsFromTitle, ...resultsFromDescription]);
+  const sources = getUniqueSourcesForCategory(newsCategory);
+
+  return formatResponseObject(
+    websiteConfiguration,
+    newsCategory,
+    navigation,
+    sources
+  );
+}

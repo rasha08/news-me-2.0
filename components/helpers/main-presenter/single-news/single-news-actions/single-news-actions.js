@@ -12,16 +12,16 @@ const SingleNewsActions = ({
   return (
     <div className="card-body">
       <a href={createBackLink()} className="card-link">
-        Go Back
+        Go To Source Page
       </a>
       <a
         onClick={() => addNewsToVisitedNews(currentNews._id, true)}
         className="card-link"
       >
-        Like This News
+        Like
       </a>
       <a href={url} target="_blank" className="card-link">
-        Visit News Website
+        Visit Website
       </a>
     </div>
   );
