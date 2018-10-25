@@ -7,7 +7,9 @@ const MainPresenter = ({
   currentCategory,
   originalUrl,
   newsCategory,
-  detectChanges
+  detectChanges,
+  addNewsToVisitedNews,
+  likedNews
 }) => {
   const { news } = newsCategory || [];
   return (
@@ -16,13 +18,19 @@ const MainPresenter = ({
       className={currentNews ? 'single-news mobcards' : 'mobcards'}
     >
       {currentNews ? (
-        <SingleNews currentNews={currentNews} originalUrl={originalUrl} />
+        <SingleNews
+          currentNews={currentNews}
+          originalUrl={originalUrl}
+          addNewsToVisitedNews={addNewsToVisitedNews}
+          likedNews={likedNews}
+        />
       ) : (
         <NewsCards
           news={news}
           currentCategory={currentCategory}
           detectChanges={detectChanges}
           originalUrl={originalUrl}
+          likedNews={likedNews}
         />
       )}
     </section>

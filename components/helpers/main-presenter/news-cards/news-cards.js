@@ -4,7 +4,13 @@ import NewsCard from '../news-card/news-card';
 const limit = 12;
 let offset = 1;
 
-const NewsCards = ({ news, currentCategory, detectChanges, originalUrl }) => {
+const NewsCards = ({
+  news,
+  currentCategory,
+  detectChanges,
+  originalUrl,
+  likedNews
+}) => {
   const increaseOffset = () => {
     offset++;
     detectChanges();
@@ -25,6 +31,7 @@ const NewsCards = ({ news, currentCategory, detectChanges, originalUrl }) => {
           key={singleNews._id}
           news={singleNews}
           currentCategory={currentCategory}
+          likedNews={likedNews}
         />
       ))}
 

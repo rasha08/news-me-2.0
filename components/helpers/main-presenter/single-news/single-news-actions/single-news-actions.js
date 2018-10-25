@@ -1,6 +1,11 @@
-const SingleNewsActions = props => {
-  const { url, title } = props.currentNews;
-  const originalUrl = props.originalUrl || '';
+const SingleNewsActions = ({
+  currentNews,
+  originalUrl,
+  addNewsToVisitedNews
+}) => {
+  const { url } = currentNews;
+  originalUrl = originalUrl || '';
+
   const createBackLink = () =>
     originalUrl.slice(0, originalUrl.lastIndexOf('/'));
 
@@ -9,7 +14,10 @@ const SingleNewsActions = props => {
       <a href={createBackLink()} className="card-link">
         Go Back
       </a>
-      <a href={createBackLink()} className="card-link">
+      <a
+        onClick={() => addNewsToVisitedNews(currentNews._id, true)}
+        className="card-link"
+      >
         Like This News
       </a>
       <a href={url} target="_blank" className="card-link">

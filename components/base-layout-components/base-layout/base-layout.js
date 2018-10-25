@@ -46,7 +46,8 @@ const BaseLayout = props => {
         currentNews={currentNews}
         currentCategory={get(newsCategory, 'categoryName')}
         originalUrl={originalUrl}
-        detectChanges={methods.detectChanges}
+        {...user}
+        {...methods}
       />
 
       <ModalComponent

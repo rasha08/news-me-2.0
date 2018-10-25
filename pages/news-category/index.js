@@ -12,7 +12,9 @@ import {
 } from '../../components/services/login.service';
 import {
   addNewsToVisited,
-  removeVisitedNews
+  removeVisitedNews,
+  addNewsToLiked,
+  getLikedNewsIds
 } from '../../components/services/news.service';
 
 export default class MyComponent extends Component {
@@ -45,6 +47,7 @@ export default class MyComponent extends Component {
       this.addNewsToVisitedNews(this.state.currentNewsId).then(() => {
         this.removeVisitedNews();
       });
+      console.log(this.state);
     });
   }
 
@@ -55,7 +58,8 @@ export default class MyComponent extends Component {
       submitModal: this.submitModal.bind(this),
       logout: this.logout.bind(this),
       openSideMenu: this.openSideMenu.bind(this),
-      detectChanges: this.detectChanges.bind(this)
+      detectChanges: this.detectChanges.bind(this),
+      addNewsToVisitedNews: this.addNewsToVisitedNews.bind(this)
     };
   }
 
@@ -104,13 +108,14 @@ export default class MyComponent extends Component {
       });
   }
 
-  addNewsToVisitedNews(newsId) {
+  addNewsToVisitedNews(newsId, likeAction = false) {
     if (!newsId) {
       return Promise.resolve();
     }
 
+    const actionPromise = likeAction ? addNewsToLiked : addNewsToVisited;
     const { user } = this.state || {};
-    return addNewsToVisited(newsId, user)
+    return actionPromise(newsId, user)
       .then(res => this.refreshUserState(newsId))
       .catch(err => this.refreshUserState(newsId, err));
   }
