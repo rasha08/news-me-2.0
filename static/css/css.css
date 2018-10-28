@@ -605,11 +605,6 @@ section#boxes .card-img-top {
   header nav .navigation-main li a i {
     color: snow;
     position: absolute;
-<<<<<<< 25cf001e533aa6da6a316e48a374fbcb30b0b196
-    top: 10%;
-    left: 25%;
-    width: auto
-=======
     top: 17%;
     left: 26%;
   }
@@ -622,7 +617,6 @@ section#boxes .card-img-top {
   }
   header nav .navigation-main li:nth-child(3) a {
     margin-left: -5%;
->>>>>>> fixed some css problems
   }
   .responsive-slide-manu .open-slide svg {
     display: block;
