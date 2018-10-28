@@ -19,7 +19,7 @@ const CustomHead = props => (
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/static/css/css.css" />
+    <link rel="stylesheet" href="/static/css/prod-01.css" />
   </Head>
 );
 
