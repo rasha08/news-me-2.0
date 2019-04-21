@@ -6,9 +6,7 @@ let offset = 1;
 
 const formatEntity = entity => truncate(entity, { length: 60, separator: ' ' });
 const getUrl = (currentCategory, newsTitleSlug, source) =>
-  `/today-news/${currentCategory || category}/${kebabCase(
-    source
-  )}/${newsTitleSlug}`;
+  `/today-news/${currentCategory}/${kebabCase(source)}/${newsTitleSlug}`;
 
 const NewsCards = ({
   news,
