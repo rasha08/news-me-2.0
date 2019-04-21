@@ -1,15 +1,23 @@
-import { truncate } from 'lodash';
+import { kebabCase, truncate } from 'lodash';
 
 const CardContent = props => {
-  const { title, description, urlToImage } = props.news;
+  const { title, urlToImage, source, newsTitleSlug } = props.news;
+  const { currentCategory } = props;
+  const getUrl = () =>
+    `/today-news/${currentCategory || category}/${kebabCase(
+      source
+    )}/${newsTitleSlug}`;
+
   const formatEntity = entity =>
-    truncate(entity, { length: 70, separator: ' ' });
+    truncate(entity, { length: 100, separator: ' ' });
   return (
-    <div className="card-body">
-      <div className="img-container">
-        <img data-src={urlToImage} alt={title} title={title} className="img" />
+    <div className='card-content-wrapper'>
+      <div className='img-container'>
+        <img data-src={urlToImage} alt={title} title={title} className='img' />
       </div>
-      <h5 className="card-title align-text-bottom">{formatEntity(title)}</h5>
+      <div className='card-content'>
+        <a href={getUrl()}>{formatEntity(title)}</a>
+      </div>
     </div>
   );
 };

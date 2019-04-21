@@ -14,8 +14,9 @@ const MainPresenter = ({
   const { news } = newsCategory || [];
   return (
     <section
-      id="boxes"
-      className={currentNews ? 'single-news mobcards' : 'mobcards'}
+      id='boxes'
+      className='col-md-12 col-lg-8 col-xl-9 col-sm-12'
+      id='right-menu'
     >
       {currentNews ? (
         <SingleNews
@@ -23,6 +24,8 @@ const MainPresenter = ({
           originalUrl={originalUrl}
           addNewsToVisitedNews={addNewsToVisitedNews}
           likedNews={likedNews}
+          news={news}
+          currentCategory={currentCategory}
         />
       ) : (
         <NewsCards

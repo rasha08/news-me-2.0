@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const next = require('next');
 const axios = require('axios');
@@ -25,7 +26,9 @@ const {
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 
-console.log(dev ? 'server is in development mode' : 'server is in production mode');
+console.log(
+  dev ? 'server is in development mode' : 'server is in production mode'
+);
 const nextApp = next({ dev });
 const nextHandle = nextApp.getRequestHandler();
 
@@ -42,6 +45,12 @@ nextApp.prepare().then(() => {
       console.log('Requesting Home page');
       nextApp.render(req, res, '/news-category', prepareResponseForCategory());
     });
+
+    server.get('/today-news', (req, res) => {
+      console.log('Requesting Home page');
+      nextApp.render(req, res, '/news-category', prepareResponseForCategory());
+    });
+
     server.get('/today-news/:category', (req, res) => {
       console.log(`Requesting ${req.params.category} category page`);
       nextApp.render(
@@ -103,11 +112,22 @@ nextApp.prepare().then(() => {
 let fetchNewsAndConfiguration = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get('http://api-news-me.ml/public/today-news')
+      .get('http://api.news-me.net/public/today-news')
       .then(apiNewsAndConfiguration => {
         websiteConfiguration =
           apiNewsAndConfiguration.data['clientConfiguration'];
         newsCategories = apiNewsAndConfiguration.data['newsCategories'];
+        each(newsCategories, category => {
+          category.news = orderBy(
+            each(
+              category.news,
+              n => (n.timestamp = new Date('publishedAt').getTime())
+            ),
+            ['timestamp'],
+            ['desc']
+          );
+        });
+
         navigation = reverse(
           remove(
             map(newsCategories, formatNavigationItems),
@@ -240,17 +260,19 @@ const prepareSearchResultsNewsResponse = query => {
   const newsCategory = {
     categoryName: null,
     news: []
-  }
-  const resultsFromTitle = []
-  const resultsFromDescription = []
+  };
+  const resultsFromTitle = [];
+  const resultsFromDescription = [];
 
-  each(newsCategories, category => each(category.news, singleNews => {
-    if (includes(toLower(singleNews.title), query)) {
-      resultsFromTitle.push(singleNews)
-    } else if (includes(toLower(singleNews.description), query)) {
-      resultsFromDescription.push(singleNews)
-    }
-  }))
+  each(newsCategories, category =>
+    each(category.news, singleNews => {
+      if (includes(toLower(singleNews.title), query)) {
+        resultsFromTitle.push(singleNews);
+      } else if (includes(toLower(singleNews.description), query)) {
+        resultsFromDescription.push(singleNews);
+      }
+    })
+  );
 
   newsCategory.news = uniq([...resultsFromTitle, ...resultsFromDescription]);
   const sources = getUniqueSourcesForCategory(newsCategory);
@@ -261,4 +283,4 @@ const prepareSearchResultsNewsResponse = query => {
     navigation,
     sources
   );
-}
+};

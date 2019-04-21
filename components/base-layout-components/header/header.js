@@ -2,22 +2,36 @@ import MenuButton from '../../helpers/header/menu-button/menu-button';
 import RightNavigation from '../../helpers/header/right-navigation/right-navigation';
 import MainNavigation from '../../helpers/header/main-navigation/main-navigation';
 
-const Header = ({ navigation, openModal, user, logout, websiteConfiguration, showRightNavigation, openSideMenu }) => {
+const Header = ({
+  navigation,
+  openModal,
+  user,
+  logout,
+  websiteConfiguration,
+  showRightNavigation,
+  openSideMenu
+}) => {
   return (
-    <header>
-      <div className="container">
-        <nav>
-          <MenuButton openSideMenu={openSideMenu} />
+    <div>
+      <div id='header'>
+        <div className='row align-items-center'>
+          <div className='col-lg-5 col-md-6 col-sm-6 col-xs-6'>
+            <MenuButton openSideMenu={openSideMenu} />
+            <a href='/' className='logo' id='logo' />
+          </div>
 
-          <a href="/" className="logo" id="logo"></a>
-
-          <MainNavigation navigation={navigation} />
-
-          <RightNavigation openModal={openModal} logout={logout} user={user} websiteConfiguration={websiteConfiguration} showRightNavigation={showRightNavigation}/>
-        </nav>
+          <RightNavigation
+            openModal={openModal}
+            logout={logout}
+            user={user}
+            websiteConfiguration={websiteConfiguration}
+            showRightNavigation={showRightNavigation}
+          />
+        </div>
       </div>
-    </header>
-  )
-}
+      <MainNavigation navigation={navigation} />
+    </div>
+  );
+};
 
 export default Header;

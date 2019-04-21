@@ -1,11 +1,14 @@
 import { isEmpty } from 'lodash';
-import { resetRegistrationData, submitRegistrationData } from './registration.service';
+import {
+  resetRegistrationData,
+  submitRegistrationData
+} from './registration.service';
 import { resetLoginData, submitLoginData } from './login.service';
 
 export const getModalCssClass = modalType => {
   const open = isEmpty(modalType) ? '' : 'open';
-  return `modal ${ open } ${ modalType }`;
-}
+  return `modal ${open} ${modalType}`;
+};
 
 export const getModalTitle = modalType => {
   if (modalType === 'registration') {
@@ -25,9 +28,9 @@ export const getModalButtonLabel = modalType => {
   } else {
     return 'Ok';
   }
-}
+};
 
-export const closeModal = (modalType) => {
+export const closeModal = modalType => {
   if (modalType === 'registration') {
     resetRegistrationData();
   } else if (modalType === 'login') {
@@ -35,9 +38,10 @@ export const closeModal = (modalType) => {
   } else {
     return 'Ok';
   }
-}
+};
 
-export const submitModal = (modalType) => {
+export const submitModal = modalType => {
+  console.log(modalType, 'KITA');
   if (modalType === 'registration') {
     return submitRegistrationData();
   } else if (modalType === 'login') {
@@ -45,4 +49,4 @@ export const submitModal = (modalType) => {
   } else {
     return 'Ok';
   }
-}
+};

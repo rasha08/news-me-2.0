@@ -1,25 +1,26 @@
 import { get } from 'lodash';
 
-const RightNavigation = (props) => {
-  const { openModal, user, logout, websiteConfiguration, showRightNavigation } = props;
+const RightNavigation = props => {
+  const { openModal, user, logout, showRightNavigation } = props;
   return (
-    <ul className="navigation-right">
-      {
-        showRightNavigation ?
-          user ?
-            <div>
-              {/* <li><a onClick={() => openModal('registration')}>My Account</a></li> */}
-              <li><a onClick={() => logout()}>logout</a></li>
-            </div> :
-            <div>
-              <li><a onClick={() => openModal('registration')}>Sign in</a></li>
-              <li><a onClick={() => openModal('login')}>login</a></li>
-            </div> :
-          <div />
-      }
-    </ul>
+    <div className='col-lg-7 col-md-6 col-sm-6 col-xs-6'>
+      {showRightNavigation ? (
+        user ? (
+          <div className='sign-in-login'>
+            <button onClick={() => logout()}>Logout</button>
+          </div>
+        ) : (
+          <div className='sign-in-login'>
+            <button onClick={() => openModal('registration')}>Register</button>
+
+            <button onClick={() => openModal('login')}>Login</button>
+          </div>
+        )
+      ) : (
+        <div />
+      )}
+    </div>
   );
-}
+};
 
 export default RightNavigation;
-

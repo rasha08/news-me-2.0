@@ -26,6 +26,11 @@ export const resetLoginData = () => {
 };
 
 export const submitLoginData = () => {
+  console.log(
+    isLoginDataValid(),
+    isEmailValid(get(loginData, 'email')),
+    isStringAplhaNumeric(get(loginData, 'password'))
+  );
   if (isLoginDataValid()) {
     return submitDataToApi('login', loginData).then(res => {
       setRememeberMeTokenIfNeeded(res);

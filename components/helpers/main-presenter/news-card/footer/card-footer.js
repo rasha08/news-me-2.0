@@ -1,16 +1,22 @@
-import { kebabCase } from 'lodash';
-
+const formatDate = date => (date ? date.slice(0, 10) : '');
 
 const CardFooter = props => {
-  const { source, newsTitleSlug, category } = props.news
-  const { currentCategory } = props
-  const getUrl = () => `/today-news/${currentCategory || category}/${kebabCase(source)}/${newsTitleSlug}`;
+  const { publishedAt } = props.news;
 
   return (
-    <div className="card-footer text-muted">
-      <a href={getUrl()} className="btn btn-primary">Open News</a>
+    <div className='card-footer'>
+      <div className='date'>
+        <span>
+          <p>{formatDate(publishedAt)}</p>
+        </span>
+      </div>
+      <div className='card-icons'>
+        <i className='far fa-heart' />
+        <i className='far fa-comments' />
+        <i className='fas fa-share-alt' />
+      </div>
     </div>
   );
-}
+};
 
-export default CardFooter
+export default CardFooter;

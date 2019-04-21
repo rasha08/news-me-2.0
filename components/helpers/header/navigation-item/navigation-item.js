@@ -3,31 +3,29 @@ const NavigationItem = props => {
   const getNewsCategoryIconName = categorySlug => {
     switch (categorySlug) {
       case 'entertainment-news':
-        return 'stars';
+        return 'fas fa-lg fa-theater-masks';
       case 'business-news':
-        return 'work';
-      case 'technology-news':
-        return 'important_devices';
-      case 'sport-news':
-        return 'directions_bike';
+        return 'fas fa-lg fa-suitcase';
+      case 'fa-laptop':
+        return 'fas fa-lg important_devices';
+      case 'fa-futbol':
+        return 'fas fa-lg directions_bike';
       case 'life-health-fitnes-news':
-        return 'fitness_center';
+        return 'fas fa-lg fa-weight';
       case 'programming-news':
-        return 'settings_ethernet';
+        return 'fas fa-lg fa-keyboard ';
       case 'cryptocurrency-news':
-        return 'attach_money';
+        return 'fas fa-lg fa-dollar-sign';
 
       default:
-        return 'public';
+        return 'fas fa-lg fa-globe-europe';
     }
   };
   return (
-    <li className="navigation-item">
-      <a href={`/today-news/${category.slug}`}>
-        {category.name}{' '}
-        <i className="material-icons">
-          {getNewsCategoryIconName(category.slug)}
-        </i>
+    <li className='nav-item'>
+      <a className='nav-link active' href={`/today-news/${category.slug}`}>
+        <span className='category'> {category.name} </span>
+        <i className={getNewsCategoryIconName(category.slug)} />
       </a>
     </li>
   );

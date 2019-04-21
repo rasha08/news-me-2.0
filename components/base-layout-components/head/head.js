@@ -4,22 +4,24 @@ const CustomHead = props => (
   <Head>
     <title>{props.title || 'NEWS-ME.NET'}</title>
     <meta
-      name="viewport"
-      content="initial-scale=1.0, width=device-width"
-      key="viewport"
+      name='viewport'
+      content='initial-scale=1.0, width=device-width'
+      key='viewport'
     />
     <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
+      rel='stylesheet'
+      href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+      integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
+      crossorigin='anonymous'
     />
-    <link rel="icon" sizes="any" mask="" href="/static/img/logo.jpg" />
+    <link rel='stylesheet' href='/static/css/app.css' />
     <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+      rel='stylesheet'
+      href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'
+      integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr'
+      crossorigin='anonymous'
     />
-    <link rel="stylesheet" href="/static/css/prod-01.css" />
+    <link rel='icon' sizes='any' mask='' href='/static/img/logo.jpg' />
   </Head>
 );
 

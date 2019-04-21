@@ -6,7 +6,7 @@ import { setLikedCssClassIfNeeded } from '../../../services/utils.service';
 
 const NewsCard = ({ news, currentCategory, likedNews }) => {
   return (
-    <div className="box col-md-3">
+    <div className='cards'>
       <div
         className={`${setLikedCssClassIfNeeded(
           news,
@@ -14,7 +14,7 @@ const NewsCard = ({ news, currentCategory, likedNews }) => {
         )} card text-center`}
       >
         <CardHeader news={news} />
-        <CardContent news={news} />
+        <CardContent news={news} currentCategory={currentCategory} />
         <CardFooter news={news} currentCategory={currentCategory} />
       </div>
     </div>

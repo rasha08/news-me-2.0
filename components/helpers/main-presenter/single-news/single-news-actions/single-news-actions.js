@@ -10,20 +10,33 @@ const SingleNewsActions = ({
     originalUrl.slice(0, originalUrl.lastIndexOf('/'));
 
   return (
-    <div className="card-body">
-      <a href={createBackLink()} className="card-link">
-        Go To Source Page
-      </a>
-      <a
-        onClick={() => addNewsToVisitedNews(currentNews._id, true)}
-        className="card-link"
-      >
-        Like
-      </a>
-      <a href={url} target="_blank" className="card-link">
-        Visit Website
-      </a>
-    </div>
+    <ul className='open-news-icon'>
+      <li className='home'>
+        <a href='/'>
+          <i className='fas fa-home' />
+        </a>
+      </li>
+      <li className='like'>
+        <a onClick={() => addNewsToVisitedNews(currentNews._id, true)}>
+          <i className='far fa-heart' />
+        </a>
+      </li>
+      <li className='comment'>
+        <a>
+          <i className='far fa-comments' />
+        </a>
+      </li>
+      <li className='share'>
+        <a href={createBackLink()}>
+          <i className='fas fa-satellite-dish' />
+        </a>
+      </li>
+      <li className='sorce'>
+        <a href={url} target='_blank'>
+          <i className='fas fa-external-link-alt' />
+        </a>
+      </li>
+    </ul>
   );
 };
 

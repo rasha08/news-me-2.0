@@ -2,15 +2,16 @@ import { getModalButtonLabel } from '../../../services/modal-helper.service.js';
 
 const ModalFooter = props => {
   const { modalTypeOpen, submitModal, closeModal } = props;
-  const modalAction = () => (modalTypeOpen === 'alert') ? closeModal() : submitModal(modalTypeOpen);
+  const modalAction = () =>
+    modalTypeOpen === 'alert' ? closeModal() : submitModal(modalTypeOpen);
 
   return (
-    <div className="modal-footer">
-      <button className="btn btn-primary" onClick={() => modalAction()}>
+    <div className='modal-footer'>
+      <a className='button' onClick={() => modalAction()}>
         {getModalButtonLabel(modalTypeOpen)}
-      </button>
+      </a>
     </div>
   );
-}
+};
 
 export default ModalFooter;
