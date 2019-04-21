@@ -4,9 +4,7 @@ const CardContent = props => {
   const { title, urlToImage, source, newsTitleSlug } = props.news;
   const { currentCategory } = props;
   const getUrl = () =>
-    `/today-news/${currentCategory || category}/${kebabCase(
-      source
-    )}/${newsTitleSlug}`;
+    `/today-news/${currentCategory}/${kebabCase(source)}/${newsTitleSlug}`;
 
   const formatEntity = entity =>
     truncate(entity, { length: 100, separator: ' ' });
