@@ -1,15 +1,21 @@
 import { trim, isEmpty, escape, toLower, kebabCase, gt, get } from 'lodash';
+let query = ''
 
 const Search = () => {
-  const validateSearchAndGo = event => {
+  const validateSearchAndGo = (event, force) => {
     const { value } = event.target;
     if (
-      event.key == 'Enter' &&
+      (event.key == 'Enter' &&
       !isEmpty(trim(value)) &&
-      gt(get(value, 'length'), 2)
+      gt(get(value, 'length'), 2)) || force
     ) {
+      if (!force) {
+        query = value
+      }
       window.location.href =
-        '/today-news/search/' + kebabCase(toLower(escape(value)));
+        '/today-news/search/' + kebabCase(toLower(escape(query)));
+    } else {
+      query = value
     }
   };
 
@@ -28,7 +34,7 @@ const Search = () => {
           <button
             type='button'
             className='button-input'
-            onClick={$event => validateSearchAndGo($event)}
+            onClick={$event => validateSearchAndGo($event, true)}
           >
             <i className='fas fa-search fa-lg' />
           </button>
