@@ -283,7 +283,6 @@ body {
 
 .open-news-main {
   height: 500px;
-  background: url('img/2.jpg');
   background-position: center;
   background-size: cover;
   margin-top: 20px;
@@ -622,7 +621,7 @@ a:hover {
   }
 
   #nav {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 100%;
     height: 50px;
