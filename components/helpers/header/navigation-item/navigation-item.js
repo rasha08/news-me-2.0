@@ -6,12 +6,12 @@ const NavigationItem = props => {
         return 'fas fa-lg fa-theater-masks';
       case 'business-news':
         return 'fas fa-lg fa-suitcase';
-      case 'fa-laptop':
-        return 'fas fa-lg important_devices';
-      case 'fa-futbol':
-        return 'fas fa-lg directions_bike';
+      case 'technology-news':
+        return 'fas fa-lg fa-cogs';
+      case 'sport-news':
+        return 'fas fa-lg fa-basketball-ball';
       case 'life-health-fitnes-news':
-        return 'fas fa-lg fa-weight';
+        return 'fas fa-lg fa-apple-alt';
       case 'programming-news':
         return 'fas fa-lg fa-keyboard ';
       case 'cryptocurrency-news':
