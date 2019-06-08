@@ -1,21 +1,22 @@
 import { trim, isEmpty, escape, toLower, kebabCase, gt, get } from 'lodash';
-let query = ''
+let query = '';
 
 const Search = () => {
   const validateSearchAndGo = (event, force) => {
     const { value } = event.target;
     if (
       (event.key == 'Enter' &&
-      !isEmpty(trim(value)) &&
-      gt(get(value, 'length'), 2)) || force
+        !isEmpty(trim(value)) &&
+        gt(get(value, 'length'), 2)) ||
+      force
     ) {
       if (!force) {
-        query = value
+        query = value;
       }
       window.location.href =
         '/today-news/search/' + kebabCase(toLower(escape(query)));
     } else {
-      query = value
+      query = value;
     }
   };
 
@@ -28,7 +29,7 @@ const Search = () => {
           placeholder='Search'
           aria-label='Search'
           aria-describedby='basic-addon2'
-          onKeyPress={$event => validateSearchAndGo($event)}
+          onKeyUp={$event => validateSearchAndGo($event)}
         />
         <div className='input-group-append'>
           <button

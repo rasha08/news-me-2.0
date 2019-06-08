@@ -85,8 +85,12 @@ nextApp.prepare().then(() => {
     });
 
     server.get('/today-news/:category/:source/:newsSlug', (req, res) => {
-      const { category, source, newsSlug } = req.params;
+      let { category, source, newsSlug } = req.params;
       console.log(`Requesting news page `, category, source, newsSlug);
+
+      if (category === 'null') {
+        category = findCategoryBySingleNewsSlug(newsSlug);
+      }
 
       nextApp.render(
         req,
@@ -254,6 +258,19 @@ let findSingleNewsBySlug = (newsCategory, newsSlug) => {
     get(newsCategory, 'news'),
     singleNews => get(singleNews, 'newsTitleSlug') === newsSlug
   );
+};
+
+let findCategoryBySingleNewsSlug = newsTitleSlug => {
+  let singleNews = null;
+
+  each(newsCategories, ({ news }) => {
+    singleNews = find(news, { newsTitleSlug });
+    if (singleNews) {
+      return false;
+    }
+  });
+
+  return get(singleNews, 'category');
 };
 
 const prepareSearchResultsNewsResponse = query => {
