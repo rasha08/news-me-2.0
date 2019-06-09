@@ -22,7 +22,12 @@ const BaseLayout = props => {
   } = props.data;
   return (
     <div className='container-fluid'>
-      <CustomHead />
+      <CustomHead
+        newsCategory={newsCategory}
+        currentNews={currentNews}
+        currentCategory={get(newsCategory, 'categoryName')}
+        originalUrl={originalUrl}
+      />
 
       <Header
         openModal={methods.openModal}

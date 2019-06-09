@@ -10,12 +10,12 @@ const CardContent = props => {
     truncate(entity, { length: 100, separator: ' ' });
   return (
     <div className='card-content-wrapper'>
-      <div className='img-container'>
+      <figure className='img-container'>
         <img data-src={urlToImage} alt={title} title={title} className='img' />
-      </div>
-      <div className='card-content'>
+      </figure>
+      <h3 className='card-content'>
         <a href={getUrl()}>{formatEntity(title)}</a>
-      </div>
+      </h3>
     </div>
   );
 };

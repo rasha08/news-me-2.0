@@ -53,7 +53,7 @@ const SingleNews = ({
           {map(
             slice(news, 1, 4),
             ({ title, urlToImage, newsTitleSlug, source }, index) => (
-              <div className='similar-card col-sm-3 smallest' key={index}>
+              <article className='similar-card col-sm-3 smallest' key={index}>
                 <div className='similar-card-img'>
                   <img
                     data-src={urlToImage}
@@ -62,19 +62,22 @@ const SingleNews = ({
                     className='img img-responsive'
                   />
                 </div>
-                <a
-                  className='similar-card-content'
-                  href={getUrl(currentCategory, newsTitleSlug, source)}
-                >
-                  {formatEntity(title)}
-                </a>
+                <h2>
+                  <a
+                    className='similar-card-content'
+                    href={getUrl(currentCategory, newsTitleSlug, source)}
+                  >
+                    {formatEntity(title)}
+                  </a>
+                </h2>
+
                 <div className='first-line-similar' />
                 <div className='second-line-similar'>
                   <i className='far fa-comments' />
                   <i className='far fa-heart' />
                   <i className='fas fa-share-alt' />
                 </div>
-              </div>
+              </article>
             )
           )}
         </div>

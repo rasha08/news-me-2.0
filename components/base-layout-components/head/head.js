@@ -1,8 +1,17 @@
 import Head from 'next/head';
+import { LdSchema } from './schemas/LdSchema';
+import { CategoryLdSchema } from './schemas/CategoryLdShema';
+import { capitalize, split, join, map } from 'lodash';
+
+const createCategoryTitle = category =>
+  join(map(split(category, '-'), capitalize), ' ');
 
 const CustomHead = props => (
   <Head>
-    <title>{props.title || 'NEWS-ME.NET'}</title>
+    <title>
+      {'News Me - Today News - ' + createCategoryTitle(props.currentCategory) ||
+        'News Me - Today News'}
+    </title>
     <meta
       name='viewport'
       content='initial-scale=1.0, width=device-width'
@@ -22,6 +31,7 @@ const CustomHead = props => (
       crossorigin='anonymous'
     />
     <link rel='icon' sizes='any' mask='' href='/static/img/logo.jpg' />
+    {props.currentNews ? <LdSchema news={props.currentNews} /> : <></>}
   </Head>
 );
 

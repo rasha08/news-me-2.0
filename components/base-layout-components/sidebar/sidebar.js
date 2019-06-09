@@ -10,7 +10,7 @@ const getClassName = sideMenuOpen => {
 
 const Sidebar = ({ sources, currentCategory, sideMenuOpen }) => {
   return (
-    <div className={getClassName(sideMenuOpen)} id='aside'>
+    <aside className={getClassName(sideMenuOpen)} id='aside'>
       <div id='sidemenu'>
         <Search />
         <div className='col-md-12'>
@@ -25,7 +25,7 @@ const Sidebar = ({ sources, currentCategory, sideMenuOpen }) => {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

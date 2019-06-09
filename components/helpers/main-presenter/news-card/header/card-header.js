@@ -3,7 +3,7 @@ const CardHeader = props => {
 
   return (
     <div className='card-header'>
-      <p>{source}</p>
+      <h6>{source}</h6>
     </div>
   );
 };

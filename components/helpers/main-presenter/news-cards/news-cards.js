@@ -29,12 +29,15 @@ const NewsCards = ({
     } catch (error) {}
   }
   return (
-    <div>
-      <div className='row all-news-wrapper'>
+    <main>
+      <section className='row all-news-wrapper'>
         {map(
           slice(news, 0, 1),
           ({ title, urlToImage, newsTitleSlug, source }, index) => (
-            <div className='col-sm-12 col-md-8 col-xl-6 col-lg-6' key={index}>
+            <article
+              className='col-sm-12 col-md-8 col-xl-6 col-lg-6'
+              key={index}
+            >
               <a id='top_header_target' />
               <div className='top-news'>
                 <div className='banner-top-news'>
@@ -54,10 +57,10 @@ const NewsCards = ({
                   className='top-news-footer'
                   href={getUrl(currentCategory, newsTitleSlug, source)}
                 >
-                  <p>{formatEntity(title)}</p>
+                  <h3>{formatEntity(title)}</h3>
                 </a>
               </div>
-            </div>
+            </article>
           )
         )}
 
@@ -73,7 +76,7 @@ const NewsCards = ({
             {map(
               slice(news, 1, 4),
               ({ title, urlToImage, newsTitleSlug, source }, index) => (
-                <div className='similar-card' key={index}>
+                <article className='similar-card' key={index}>
                   <div className='similar-card-img'>
                     <img
                       data-src={urlToImage}
@@ -82,24 +85,26 @@ const NewsCards = ({
                       className='img img-responsive'
                     />
                   </div>
-                  <a
-                    className='similar-card-content'
-                    href={getUrl(currentCategory, newsTitleSlug, source)}
-                  >
-                    {formatEntity(title)}
-                  </a>
+                  <h3>
+                    <a
+                      className='similar-card-content'
+                      href={getUrl(currentCategory, newsTitleSlug, source)}
+                    >
+                      {formatEntity(title)}
+                    </a>
+                  </h3>
                   <div className='first-line-similar' />
                   <div className='second-line-similar'>
                     <i className='far fa-comments' />
                     <i className='far fa-heart' />
                     <i className='fas fa-share-alt' />
                   </div>
-                </div>
+                </article>
               )
             )}
           </div>
         </div>
-      </div>
+      </section>
 
       <div className='another-title'>
         <h5>
@@ -108,7 +113,7 @@ const NewsCards = ({
         </h5>
       </div>
 
-      <div className='another-news-container'>
+      <section className='another-news-container'>
         <div className='row'>
           {map(slice(news, 4, limit * offset), singleNews => (
             <NewsCard
@@ -119,7 +124,7 @@ const NewsCards = ({
             />
           ))}
         </div>
-      </div>
+      </section>
 
       <hr />
       {!gte(limit * offset, get(news, 'length')) ? (
@@ -132,7 +137,7 @@ const NewsCards = ({
       ) : (
         <div />
       )}
-    </div>
+    </main>
   );
 };
 
