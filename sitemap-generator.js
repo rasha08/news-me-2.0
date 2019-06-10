@@ -91,8 +91,7 @@ let creteSitemapString = newsCategories => {
   });
 
   sitemapString += `
-    </urlset>
-  `;
+    </urlset>`;
 
   return sitemapString;
 };
