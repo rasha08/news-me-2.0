@@ -74,11 +74,18 @@ body {
   padding-bottom: 70px;
 }
 
-.top-news-footer p {
+.top-news-footer h3 {
   color: white;
   padding: 10px;
   font-weight: 600;
   font-size: calc(12px + 0.2vw);
+}
+
+h3 {
+  line-height: 16px;
+}
+h3 a {
+  font-size: calc(14px + 0.2vw) !important;
 }
 
 .box {
@@ -447,7 +454,9 @@ body {
 }
 
 .similar-card-img {
-  width: 40%;
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
   height: 100%;
   background-position: center;
   background-size: cover;

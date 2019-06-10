@@ -1,7 +1,6 @@
 import { kebabCase } from 'lodash';
 
 export const LdSchema = news => {
-  console.log('NEWSSSS', news);
   const schema = {};
 
   schema['@context'] = 'https://schema.org';

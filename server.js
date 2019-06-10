@@ -146,7 +146,7 @@ let fetchNewsAndConfiguration = () => {
 };
 
 let scheduleNewsAndConfigurationRefresh = () =>
-  setInterval(() => fetchNewsAndConfiguration(), 100000);
+  setInterval(() => fetchNewsAndConfiguration(), 50000);
 
 let removeTopHeadlinesFromNavigation = category =>
   category.slug !== 'top-headlines';

@@ -1,17 +1,20 @@
-import { map } from 'lodash';
+import { map, kebabCase } from 'lodash';
+import { createCategoryTitle } from '../../../services/utils.service';
 
-export const CategoryLdSchema = category => {
+export const CategoryLdSchema = props => {
   const schema = {};
 
   schema['@context'] = 'https://schema.org';
   schema['@type'] = 'Itemlist';
-  schema['name'] = 'Name of Page';
-  schema['url'] = '';
-  schema['itemlistElement'] = map(news, (n, index) => {
+  schema['name'] = createCategoryTitle(props.originalUrl);
+  schema['url'] = `https://news-me.net${props.originalUrl}`;
+  schema['itemlistElement'] = map(props.newsCategory.news, (n, index) => {
     const listItem = {
-      name: 'Name of Category',
-      url: 'URL of Category',
-      position: index
+      name: n.title,
+      url: `https://news-me.net/today-news/${n.category}/${kebabCase(
+        n.source
+      )}/${n.newsTitleSlug}`,
+      position: index + 1
     };
     listItem['@type'] = 'ListItem';
 

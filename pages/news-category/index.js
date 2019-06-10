@@ -165,7 +165,7 @@ export default class MyComponent extends Component {
             }}
           />
         </div>
-        <script src="/static/js/custom.js" />
+        <script src='/static/js/custom.js' />
       </div>
     );
   }
