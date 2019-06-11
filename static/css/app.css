@@ -81,11 +81,13 @@ body {
   font-size: calc(12px + 0.2vw);
 }
 
+h2,
 h3 {
   line-height: 16px;
 }
-h3 a {
-  font-size: calc(14px + 0.2vw) !important;
+h3 a,
+h2 a {
+  font-size: calc(12px + 0.2vw) !important;
 }
 
 .box {
