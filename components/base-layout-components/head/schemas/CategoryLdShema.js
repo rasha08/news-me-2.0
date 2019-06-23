@@ -1,4 +1,4 @@
-import { map, kebabCase } from 'lodash';
+import { map, kebabCase, get } from 'lodash';
 import { createCategoryTitle } from '../../../services/utils.service';
 
 export const CategoryLdSchema = props => {
@@ -8,18 +8,21 @@ export const CategoryLdSchema = props => {
   schema['@type'] = 'Itemlist';
   schema['name'] = createCategoryTitle(props.originalUrl);
   schema['url'] = `https://news-me.net${props.originalUrl}`;
-  schema['itemlistElement'] = map(props.newsCategory.news, (n, index) => {
-    const listItem = {
-      name: n.title,
-      url: `https://news-me.net/today-news/${n.category}/${kebabCase(
-        n.source
-      )}/${n.newsTitleSlug}`,
-      position: index + 1
-    };
-    listItem['@type'] = 'ListItem';
+  schema['itemlistElement'] = map(
+    get(props, 'newsCategory.news', []),
+    (n, index) => {
+      const listItem = {
+        name: n.title,
+        url: `https://news-me.net/today-news/${n.category}/${kebabCase(
+          n.source
+        )}/${n.newsTitleSlug}`,
+        position: index + 1
+      };
+      listItem['@type'] = 'ListItem';
 
-    return listItem;
-  });
+      return listItem;
+    }
+  );
 
   return (
     <script
